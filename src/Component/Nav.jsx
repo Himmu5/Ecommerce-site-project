@@ -24,7 +24,7 @@ export default function Nav({total}) {
             />
           </Link>
           <div className="flex flex-col">
-            <Link to="/component/Cart/NewCart">
+            <Link to="/component/Cart/CartPage">
             <span className="absolute ml-8 pl-1 pr-1 text-white bg-red-400 rounded-xl self-end ">{total}</span>
             <BiCart className="text-5xl" />
             </Link>
