@@ -17,6 +17,7 @@ export default function MainContant() {
     mydata
       .then(function (response) {
         setApiData(response.data.products);
+        setLoading(false);
       })
       .catch(function () {
         setLoading(false);
@@ -30,6 +31,11 @@ export default function MainContant() {
   ApiData = ApiData.filter(function (item) {
     return item.title.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
   });
+
+  // if(ApiData.length==0){
+  //     return <Loading/>
+  // }
+
 
   if (Query == "LtoH") {
     ApiData.sort(function (x, y) {
@@ -54,7 +60,7 @@ export default function MainContant() {
 
   // console.log(ApiData.length);
 
-  return data ? (
+  return data.length>1 ? (
     <div className="">
       <div className="ml-5 mr-5 sm:max-w-6xl sm:mx-auto sm:pl-5 sm:pr-5 sm:pt-5 sm:pb-5  mt-16 mb-16 bg-white shadow-md ">
         <div className="p-3 sm:p-20 sm:pt-10 sm:pb-0 space-y-5 ">
@@ -89,7 +95,7 @@ export default function MainContant() {
           </div>
         </div>
 
-        {data.length < 1 && <Loading />}
+        {/* {data.length < 1 && <Loading />} */}
         <AllCards data={ApiData} />
 
         <div className="flex gap-3 p-3 pt-10 sm:pl-20">

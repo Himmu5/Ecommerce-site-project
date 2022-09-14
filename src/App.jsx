@@ -9,6 +9,7 @@ import NewCard from "./Component/Cards/NewCard";
 import { useEffect, useState } from "react";
 import CartPage from "./Component/Cart/CartPage";
 import NewCart from "./Component/Cart/NewCart";
+import SearchNotFound from "./Component/SearchNotFound";
 
 function App() {
 
@@ -53,8 +54,8 @@ function App() {
         </div>
 
         <Footer />
-        {/* <NewCard /> */}
       </div>
+       
     </>
   );
 }

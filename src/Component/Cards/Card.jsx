@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import DataNotFound from "../DataNotFound";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import {Helmet} from "react-helmet";
 
 export default function Card({ CartValue }) {
   const obj = useParams();
@@ -38,6 +39,18 @@ export default function Card({ CartValue }) {
 
   return product ? (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{product.title}</title>
+        <meta property="og:type" content="website" />
+        {/* <meta property="og:url" content="https://metatags.io/" /> */}
+        <meta property="og:title" content="YogiJiCart.com -Shop Here" />
+        <meta
+          property="og:description"
+          content="This is our e-commerce site we have a large category of products like clothing, shoes, Electronics"
+        />
+      </Helmet>
+
       <div className="flex flex-col max-w-5xl mx-auto mt-5 mb-10  bg-white">
         <Link
           to="/"
@@ -73,7 +86,10 @@ export default function Card({ CartValue }) {
                     onChange={handleOnChangeCartVal}
                     id=""
                   />
-                  <button className="pl-4 pr-4 pt-1 pb-1 rounded-md bg-red-400 text-white" onClick={HandleAddToCart}>
+                  <button
+                    className="pl-4 pr-4 pt-1 pb-1 rounded-md bg-red-400 text-white"
+                    onClick={HandleAddToCart}
+                  >
                     Add To Cart
                   </button>
                 </div>

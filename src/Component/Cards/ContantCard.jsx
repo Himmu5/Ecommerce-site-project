@@ -6,19 +6,7 @@ import { Helmet } from "react-helmet";
 export default function ContantCard({ data }) {
   return (
     <div className="p-3 sm:shadow-md">
-      <Helmet>
-        
-        <meta charSet="utf-8" />
-        <title>{data.title}</title>
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
-        <meta property="og:title" content="Our doorstep delivery site" />
-        <meta
-          property="og:description"
-          content="This is our e-commerce site we have a large category of products like clothing, shoes, Electronics"
-        />
-
-      </Helmet>
+    
 
       <div className=" aspect-square">
         <img
