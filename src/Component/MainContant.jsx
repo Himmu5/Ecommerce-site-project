@@ -6,6 +6,7 @@ import { useState } from "react";
 import Loading from "./Cards/Loading";
 import DataNotFound from "./DataNotFound";
 import { BiSearch } from "react-icons/bi";
+import SearchNotFound from "./SearchNotFound";
 
 export default function MainContant() {
   const [data, setApiData] = useState([]);
@@ -95,7 +96,7 @@ export default function MainContant() {
           </div>
         </div>
 
-        {/* {data.length < 1 && <Loading />} */}
+        {ApiData.length === 0 && <SearchNotFound />}
         <AllCards data={ApiData} />
 
         <div className="flex gap-3 p-3 pt-10 sm:pl-20">
