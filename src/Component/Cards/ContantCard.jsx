@@ -8,9 +8,9 @@ export default function ContantCard({ data }) {
     <div className="p-3 sm:shadow-md">
     
 
-      <div className=" aspect-square">
+      <div className=" aspect-square overflow-hidden">
         <img
-          className="h-full w-full object-cover "
+          className="h-full w-full object-cover hover:scale-105"
           src={data.thumbnail}
           alt=""
         />

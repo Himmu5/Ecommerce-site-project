@@ -51,7 +51,7 @@ export default function Card({ CartValue }) {
         />
       </Helmet>
 
-      <div className="flex flex-col max-w-5xl mx-auto mt-5 mb-10  bg-white">
+      <div className="flex flex-col max-w-5xl mx-auto mt-5 mb-10  bg-white shadow-md">
         <Link
           to="/"
           className="self-start pl-1 pr-1 pt-1 pb-1 m-1 sm:m-2 hover:bg-blue-500  bg-red-400  rounded-full  "
@@ -59,7 +59,7 @@ export default function Card({ CartValue }) {
           <IoMdArrowRoundBack className="text-3xl text-white " />
         </Link>
 
-        <div className="  flex flex-col">
+        <div className="  flex flex-col ">
           <div>
             <div className="sm:flex sm:gap-10 p-3 space-y-3 sm:space-y-0 sm:p-16 sm:pt-5 sm:pb-5">
               <div className=" aspect-square">
@@ -87,7 +87,7 @@ export default function Card({ CartValue }) {
                     id=""
                   />
                   <button
-                    className="pl-4 pr-4 pt-1 pb-1 rounded-md bg-red-400 text-white"
+                    className="pl-4 pr-4 pt-1 pb-1 rounded-md bg-red-400 text-white hover:bg-red-500"
                     onClick={HandleAddToCart}
                   >
                     Add To Cart
