@@ -85,7 +85,7 @@ export default function MainContant() {
                 id=""
                 value={Query}
                 onChange={handleOnchange}
-                className="pl-6 pr-6 pt-2 pb-2 border border-gray-300"
+                className="pl-3 pr-3 md:pl-6 md:pr-6 pt-2 pb-2 border border-gray-300"
               >
                 <option value="Default">Default Sort</option>
                 <option value="LtoH">Sort By price : Low To High</option>

@@ -48,7 +48,7 @@ function App() {
               element={<Card CartValue={addToCart} />}
             ></Route>
             <Route path="*" element={<DataNotFound />}></Route>
-            <Route path="/component/Cart/CartPage" element={<CartPage/>}></Route>
+            <Route path="/component/Cart/CartPage" element={<CartPage productList={totalproduct}/>}></Route>
             {/* <Route path="/component/Cart/NewCart" element={<NewCart/>}></Route> */}
           </Routes>
         </div>

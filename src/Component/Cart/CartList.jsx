@@ -5,12 +5,22 @@ import {SingleProduct} from '../Api'
 
 
 
-export default function CartList() {
+export default function CartList({productList}) {
 
   let data=JSON.parse(localStorage.getItem('my-cart'));
   console.log( data,'from local storage');
   let Productkey=Object.keys(data);
   // console.log(Productkey);
+
+
+
+
+  
+  let promises=Object.keys(productList).map(function (productId){
+    return SingleProduct(productId);
+  });
+
+  Promise.all(promises).then((response)=>console.log(response));
 
 
   return (
@@ -29,7 +39,7 @@ export default function CartList() {
         <tr>
 
 
-          <CartRow />
+          <CartRow  productList={productList}/>
 
 
         </tr>

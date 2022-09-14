@@ -1,7 +1,12 @@
 import React from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
+
 export default function ProductCart() {
+
+
+
+
   return (
     <div className="border-2 border-t-0 ">
 
