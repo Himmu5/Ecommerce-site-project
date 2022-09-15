@@ -10,6 +10,12 @@ export default function SingleProduct({data}) {
   console.log( ' local data' ,  localdata);
 
 
+  function DeleteItem(){
+    delete localdata[id];
+    localStorage.setItem("my-cart" ,JSON.stringify(localdata));
+  }
+
+
   return (
     <>
       <div className=" text-gray-600 font-bold xl:hidden bg-white">
@@ -46,7 +52,7 @@ export default function SingleProduct({data}) {
       <div className="hidden xl:block border-b-2">
         <div className=" flex space-x-10 justify-between  items-center max-w-5xl mx-auto bg-white pt-2 pb-2 pl-4 pr-4 text-gray-500 font-bold">
           <div className="flex justify-between w-1/2 items-center">
-            <AiOutlineCloseCircle className="text-3xl " />
+            <AiOutlineCloseCircle className="text-3xl hover:text-red-500 hover:cursor-pointer" onClick={DeleteItem}/>
             <img
               src={thumbnail}
               className="h-12 w-12"
