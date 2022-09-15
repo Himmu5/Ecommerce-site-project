@@ -7,9 +7,7 @@ import Loading from "./Component/Cards/Loading";
 import DataNotFound from "./Component/DataNotFound";
 import NewCard from "./Component/Cards/NewCard";
 import { useEffect, useState } from "react";
-import CartPage from "./Component/Cart/CartPage";
-import NewCart from "./Component/Cart/NewCart";
-import SearchNotFound from "./Component/SearchNotFound";
+import Cart from '../src/Component/Cart/Cart'
 
 function App() {
 
@@ -48,7 +46,7 @@ function App() {
               element={<Card CartValue={addToCart} />}
             ></Route>
             <Route path="*" element={<DataNotFound />}></Route>
-            <Route path="/component/Cart/CartPage" element={<CartPage productList={totalproduct}/>}></Route>
+            <Route path="/component/Cart/Cart" element={<Cart productData={totalproduct}/>}></Route>
             {/* <Route path="/component/Cart/NewCart" element={<NewCart/>}></Route> */}
           </Routes>
         </div>
