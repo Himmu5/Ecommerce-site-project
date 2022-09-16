@@ -9,7 +9,7 @@ module.exports = {
       fontFamily: {
         'sans': ['ui-sans-serif', 'system-ui'],
         'Pop':['Poppins', 'system-ui']
-      }
+      },
     },
   },
   plugins: [],
