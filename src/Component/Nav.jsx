@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
 import {GiHamburgerMenu} from 'react-icons/gi'
+import HamMenu from "../Hamburgur/HamMenu";
+
 
 export default function Nav({ total }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
@@ -15,7 +17,7 @@ export default function Nav({ total }) {
 
   return (
     <div>
-      <div className=" bg-white pt-6 pb-6  pl-3 pr-3 shadow-md">
+      <div className=" bg-white pt-6 pb-6  pl-3 pr-3 shadow-md ">
         <div className="flex justify-between items-center  max-w-6xl mx-auto">
           <Link to="/">
             <img
@@ -33,10 +35,13 @@ export default function Nav({ total }) {
               </span>
               <BiCart className="text-5xl " />
             </Link>
-            {/* <GiHamburgerMenu className="text-4xl bg-red-500 text-white pl-1 pr-1 pt-1 pb-1 "/> */}
+            <GiHamburgerMenu className="text-4xl bg-red-500 text-white pl-1 pr-1 pt-1 pb-1 sm:hidden" />
+           
+
           </div>
         </div>
       </div>
+           <HamMenu />
     </div>
   );
 }

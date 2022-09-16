@@ -69,13 +69,13 @@ export default function MainContant() {
           <div className="sm:flex sm:justify-between space-y-3 sm:space-y-0">
             <h1>Showing 1-9 of 11 results</h1>
             <div className="space-y-3 sm:space-y-0 sm:flex gap-3">
-              <div className="flex items-center ">
+              <div className="flex items-center hidden md:block">
                 
                 <input
                   type="text"
                   value={searchQuery}
                   placeholder="Search product"
-                  className="border relative pt-2 pb-2 pl-7 pr-3"
+                  className="border relative pt-2 pb-2 pl-7 pr-3 "
                   onChange={HandleSearch}
                   
                 />
