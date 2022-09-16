@@ -40,7 +40,7 @@ export default function Nav({ total }) {
           </Link>
           <div className="flex  items-center space-x-3">
             <Link
-              to="/component/Cart/CartPage"
+              to="/component/Cart/Cart"
               className="hover:bg-white hover:text-red-500"
             >
               <span className="absolute ml-8 pl-1 pr-1 text-white bg-red-400 rounded-xl self-end  hover:bg-white hover:text-red-500">

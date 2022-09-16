@@ -16,6 +16,7 @@ export default function Card({ CartValue }) {
 
   function HandleAddToCart() {
     CartValue(id, count);
+    setcount(1);
   }
 
   useEffect(() => {
@@ -43,7 +44,6 @@ export default function Card({ CartValue }) {
         <meta charSet="utf-8" />
         <title>{product.title}</title>
         <meta property="og:type" content="website" />
-        {/* <meta property="og:url" content="https://metatags.io/" /> */}
         <meta property="og:title" content="YogiJiCart.com -Shop Here" />
         <meta
           property="og:description"
