@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
+import {GiHamburgerMenu} from 'react-icons/gi'
 
 export default function Nav({ total }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
@@ -22,7 +23,7 @@ export default function Nav({ total }) {
               alt=""
             />
           </Link>
-          <div className="flex flex-col">
+          <div className="flex  items-center space-x-3">
             <Link
               to="/component/Cart/CartPage"
               className="hover:bg-white hover:text-red-500"
@@ -32,6 +33,7 @@ export default function Nav({ total }) {
               </span>
               <BiCart className="text-5xl " />
             </Link>
+            {/* <GiHamburgerMenu className="text-4xl bg-red-500 text-white pl-1 pr-1 pt-1 pb-1 "/> */}
           </div>
         </div>
       </div>
