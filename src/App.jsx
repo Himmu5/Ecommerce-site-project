@@ -7,7 +7,6 @@ import Loading from "./Component/Cards/Loading";
 import DataNotFound from "./Component/DataNotFound";
 import NewCard from "./Component/Cards/NewCard";
 import { useEffect, useState } from "react";
-import CartPage from "./Component/Cart/CartPage";
 import SearchNotFound from "./Component/SearchNotFound";
 import Cart from '../src/Component/Cart/Cart'
 
