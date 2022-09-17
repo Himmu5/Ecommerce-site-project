@@ -1,6 +1,8 @@
 import React from 'react'
+import { memo } from 'react'
+import { MemoryRouter } from 'react-router-dom'
 
-export default function Footer() {
+function Footer() {
   return (
     <div className='bg-gray-700 text-white pt-5 pb-5'>
     <div className='max-w-6xl mx-auto  sm:flex justify-between'>
@@ -10,3 +12,5 @@ export default function Footer() {
     </div>
   )
 }
+
+export default memo(Footer);

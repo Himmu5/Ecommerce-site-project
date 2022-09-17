@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import ProductList from "./ProductList";
 import CartTotal from "./CartTotal";
 
-export default function Cart({ productData}) {
+function Cart({ productData}) {
   return (
     <div className="max-w-5xl mx-auto font-bold text-gray-500 bg-white p-3 mt-10 mb-10 xl:p-10">
       <ProductList  productData={ productData}/>
@@ -29,3 +29,4 @@ export default function Cart({ productData}) {
     </div>
   );
 }
+export default memo(Cart);

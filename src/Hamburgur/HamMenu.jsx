@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-export default function HamMenu() {
+function HamMenu() {
   return (
     <div className="border-2 sm:hidden  bg-white">
         <div className='pl-3 pt-1 pb-1  border-b-2 hover:text-red-500'>
@@ -21,3 +21,6 @@ export default function HamMenu() {
     </div>
   )
 }
+
+
+export default memo(HamMenu);

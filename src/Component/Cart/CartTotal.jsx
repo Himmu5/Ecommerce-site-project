@@ -1,6 +1,7 @@
 import React from "react";
+import { memo } from "react";
 
-export default function CartTotal() {
+function CartTotal() {
   return (
     <div className="space-y-2 border-2 mt-5 pb-5">
         <div>
@@ -26,3 +27,6 @@ export default function CartTotal() {
     </div>
   );
 }
+
+
+export default memo(CartTotal);

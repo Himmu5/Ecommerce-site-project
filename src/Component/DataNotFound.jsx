@@ -1,8 +1,9 @@
 import React from "react";
 import MainContant from "./MainContant";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-export default function DataNotFound() {
+function DataNotFound() {
   return (
     <div className="space-y-20 h-screen flex flex-col justify-center items-center bg-white mt-10 mb-10 pb-10">
       <div className="sm:flex justify-center gap-2 ">
@@ -26,3 +27,5 @@ export default function DataNotFound() {
     </div>
   );
 }
+
+export default memo(DataNotFound);

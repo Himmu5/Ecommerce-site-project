@@ -1,7 +1,8 @@
 import React from "react";
+import { memo } from "react";
 import {RiLoaderLine} from 'react-icons/ri'
 
-export default function Loading() {
+ function Loading() {
   return (
     <div className=" flex flex-col items-center justify-center h-screen text-6xl  text-red-500 ">
       <div className="">
@@ -11,3 +12,6 @@ export default function Loading() {
     </div>
   );
 }
+
+
+export default memo(Loading);
