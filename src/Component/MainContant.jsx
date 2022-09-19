@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import AllCards from "./Cards/AllCards";
 import ButtonNumber from "./NextButton/buttonNumber";
 import { ApiDataDummy } from "./Api";
@@ -8,7 +8,7 @@ import DataNotFound from "./DataNotFound";
 import { BiSearch } from "react-icons/bi";
 import SearchNotFound from "./SearchNotFound";
 
-export default function MainContant() {
+ function MainContant() {
   const [data, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -112,3 +112,6 @@ export default function MainContant() {
     <DataNotFound />
   );
 }
+
+
+export default memo(MainContant);

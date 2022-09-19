@@ -4,9 +4,10 @@ import { BiCart } from "react-icons/bi";
 import {GiHamburgerMenu} from 'react-icons/gi'
 import  {BsFillXCircleFill} from 'react-icons/bs'
 import HamMenu from "../Hamburgur/HamMenu";
+import { memo } from "react";
 
 
-export default function Nav({ total }) {
+ function Nav({ total }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
   // console.log('ye data local storage se aaya hai', cartvalue);
   // cartvalue= JSON.parse(cartvalue);
@@ -66,3 +67,5 @@ export default function Nav({ total }) {
     </div>
   );
 }
+
+export default memo(Nav);

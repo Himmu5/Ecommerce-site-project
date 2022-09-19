@@ -2,10 +2,11 @@ import React from "react";
 import { FcRating } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { memo } from "react";
 
-export default function ContantCard({ data }) {
+function ContantCard({ data }) {
   return (
-    <div className="p-3 sm:shadow-md">
+    <div className="p-3 shadow-md">
     
 
       <div className=" aspect-square overflow-hidden">
@@ -35,3 +36,5 @@ export default function ContantCard({ data }) {
     </div>
   );
 }
+
+export default memo(ContantCard);

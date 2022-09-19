@@ -5,7 +5,6 @@ import Card from "./Component/Cards/Card";
 import { Routes, Route } from "react-router-dom";
 import Loading from "./Component/Cards/Loading";
 import DataNotFound from "./Component/DataNotFound";
-import NewCard from "./Component/Cards/NewCard";
 import { useEffect, useState } from "react";
 import SearchNotFound from "./Component/SearchNotFound";
 import Cart from '../src/Component/Cart/Cart'

@@ -1,7 +1,8 @@
 import React from "react";
+import { memo } from "react";
 import ContantCard from "./ContantCard";
 
-export default function AllCards({data}) {
+ function AllCards({data}) {
   
   return (
     <>
@@ -17,3 +18,5 @@ export default function AllCards({data}) {
     </>
   );
 }
+
+export default memo(AllCards);
