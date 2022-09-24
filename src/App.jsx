@@ -5,39 +5,38 @@ import Card from "./Component/Cards/Card";
 import { Routes, Route } from "react-router-dom";
 import Loading from "./Component/Cards/Loading";
 import DataNotFound from "./Component/DataNotFound";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SearchNotFound from "./Component/SearchNotFound";
-import Cart from '../src/Component/Cart/Cart'
-
+import SignIn from './Validation/SignIn'
+import SignUp from "./Validation/SignUp";
+import ResetPassword from './validation/ResetPassword'
+import Cart from "../src/Component/Cart/Cart";
 
 function App() {
-
-  let oldData=localStorage.getItem('my-cart')||"{}";
-  let SavedData=JSON.parse(oldData);
-
+  let oldData = localStorage.getItem("my-cart") || "{}";
+  let SavedData = JSON.parse(oldData);
   const [totalproduct, settotalproduct] = useState(SavedData);
+
+
   // console.log(totalproduct);
 
   function addToCart(productId, count) {
-
-    const olddata =totalproduct[productId] || 0;
-    const newCart={ ...totalproduct, [productId]: +count + +(olddata) };
+    const olddata = totalproduct[productId] || 0;
+    const newCart = { ...totalproduct, [productId]: +count + +olddata };
     settotalproduct(newCart);
   }
+
   localStorage.setItem("my-cart", JSON.stringify(totalproduct));
   // console.log(totalproduct);
 
-
-  let CartTotal= Object.keys(totalproduct).reduce(( output , current  )=>{
+  let CartTotal = Object.keys(totalproduct).reduce((output, current) => {
     return output + totalproduct[current];
   }, 0);
-
-
 
   return (
     <>
       <div className="bg-gray-100 font-['Poppins'] selection:text-white selection:bg-red-400 ">
-        <Nav total={CartTotal}/>
+        <Nav total={CartTotal} />
 
         <div className="">
           <Routes>
@@ -47,15 +46,21 @@ function App() {
               element={<Card CartValue={addToCart} />}
             ></Route>
             <Route path="*" element={<DataNotFound />}></Route>
-            <Route path="/component/Cart/Cart" element={<Cart productData={totalproduct}/>}></Route>
-            {/* <Route path="/component/Cart/NewCart" element={<NewCart/>}></Route> */}
+            <Route
+              path="/component/Cart/Cart"
+              element={<Cart productData={totalproduct} />}
+            ></Route>
+           
+
+            <Route path="/component/validation/SignIn" element={<SignIn/>}></Route>
+            <Route path="/component/validation/SignUp" element={<SignUp/>}></Route>
+            <Route path="/component/validation/ResetPassword" element={<ResetPassword/>}></Route>
+            
           </Routes>
         </div>
 
         <Footer />
-      
       </div>
-       
     </>
   );
 }

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
-import {GiHamburgerMenu} from 'react-icons/gi'
-import  {BsFillXCircleFill} from 'react-icons/bs'
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BsFillXCircleFill } from "react-icons/bs";
 import HamMenu from "../Hamburgur/HamMenu";
 import { memo } from "react";
 
-
- function Nav({ total }) {
+function Nav({ total }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
   // console.log('ye data local storage se aaya hai', cartvalue);
   // cartvalue= JSON.parse(cartvalue);
@@ -17,16 +16,14 @@ import { memo } from "react";
   // } , 0)
   // console.log(CartTotal);
 
-  const[hamtoggle , sethamtoggle]=useState(false);
+  const [hamtoggle, sethamtoggle] = useState(false);
 
-  function hamClick(){
-    if(hamtoggle==false){
+  function hamClick() {
+    if (hamtoggle == false) {
       sethamtoggle(true);
-    }
-    else{
+    } else {
       sethamtoggle(false);
     }
-
   }
 
   return (
@@ -40,6 +37,15 @@ import { memo } from "react";
             />
           </Link>
           <div className="flex  items-center space-x-3">
+            <div className="hidden md:block duration-500">
+              <div className=" flex space-x-6">
+                <p>HOME</p>
+                <p>ALL PRODUCTS</p>
+                <p>ABOUT</p>
+                <p>CONTACT</p>
+                <Link to={"component/validation/SignIn"}>ACCOUNT</Link>
+              </div>
+            </div>
             <Link
               to="/component/Cart/Cart"
               className="hover:bg-white hover:text-red-500"
@@ -49,21 +55,22 @@ import { memo } from "react";
               </span>
               <BiCart className="text-5xl " />
             </Link>
-            {
-              hamtoggle && <BsFillXCircleFill className="text-4xl  text-red-500  sm:hidden hover:cursor-pointer" onClick={hamClick}/>
-            }
-            {
-              !(hamtoggle) && <GiHamburgerMenu className="text-4xl bg-red-500 text-white pl-1 pr-1 pt-1 pb-1 sm:hidden hover:cursor-pointer" onClick={hamClick} />
-            }
-            
-
+            {hamtoggle && (
+              <BsFillXCircleFill
+                className="text-4xl  text-red-500  sm:hidden hover:cursor-pointer"
+                onClick={hamClick}
+              />
+            )}
+            {!hamtoggle && (
+              <GiHamburgerMenu
+                className="text-4xl bg-red-500 text-white pl-1 pr-1 pt-1 pb-1 sm:hidden duration-500 hover:cursor-pointer"
+                onClick={hamClick}
+              />
+            )}
           </div>
         </div>
       </div>
-      {
-        hamtoggle && <HamMenu />
-      }
-           
+      {hamtoggle && <HamMenu />}
     </div>
   );
 }

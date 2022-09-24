@@ -6,8 +6,12 @@ import Loading from "./Loading";
 import DataNotFound from "../DataNotFound";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import {Helmet} from "react-helmet";
+import { memo } from "react";
 
-export default function Card({ CartValue }) {
+ function Card({ CartValue }) {
+
+  console.log("Card !!!");
+
   const obj = useParams();
   const id = obj.id;
   const [product, setproduct] = useState();
@@ -51,7 +55,7 @@ export default function Card({ CartValue }) {
         />
       </Helmet>
 
-      <div className="flex flex-col max-w-5xl mx-auto mt-5 mb-10  bg-white shadow-md">
+      <div className="flex flex-col max-w-5xl mx-auto mt-5 mb-10 px-5 sm:px-0 bg-white shadow-md">
         <Link
           to="/"
           className="self-start pl-1 pr-1 pt-1 pb-1 m-1 sm:m-2 hover:bg-blue-500  bg-red-400  rounded-full  "
@@ -125,3 +129,6 @@ export default function Card({ CartValue }) {
     <DataNotFound />
   );
 }
+
+
+export default memo(Card);

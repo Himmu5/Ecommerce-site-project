@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import {Link} from 'react-router-dom'
 
 function HamMenu() {
   return (
@@ -15,9 +16,9 @@ function HamMenu() {
         <div className="border-b-2 pl-3 pt-1 pb-1 hover:text-red-500">
             CONTACT
         </div>
-        <div className='pl-3 pt-1 pb-1 hover:text-red-500'>
+        <Link to="/component/validation/SignIn" className='pl-3 pt-1 pb-1 hover:text-red-500'>
             ACCOUNT
-        </div>
+        </Link>
     </div>
   )
 }

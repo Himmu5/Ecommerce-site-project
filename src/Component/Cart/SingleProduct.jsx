@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export default function SingleProduct({data}) {
@@ -6,7 +6,7 @@ export default function SingleProduct({data}) {
   const{id , title , price, thumbnail }=data;
 
   
-  let localdata= JSON.parse(localStorage.getItem('my-cart'));
+  let localdata=JSON.parse(localStorage.getItem('my-cart'));
   console.log( ' local data' ,  localdata);
 
 

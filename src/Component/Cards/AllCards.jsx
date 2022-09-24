@@ -4,6 +4,8 @@ import ContantCard from "./ContantCard";
 
  function AllCards({data}) {
   
+  console.log("AllCards");
+  
   return (
     <>
     
