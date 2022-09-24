@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
-import React, { memo } from "react";
+import React from "react";
 import * as Yup from "yup";
 
 function ResetPassword() {
@@ -12,6 +11,7 @@ function ResetPassword() {
     initialValues: {
       email: "",
     },
+    validationSchema:schema
   });
 
   return (
@@ -37,4 +37,4 @@ function ResetPassword() {
     </div>
   );
 }
-export default memo(ResetPassword);
+export default ResetPassword;
