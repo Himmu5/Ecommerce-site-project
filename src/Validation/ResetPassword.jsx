@@ -11,7 +11,7 @@ function ResetPassword() {
     initialValues: {
       email: "",
     },
-    validationSchema:schema
+    validationSchema:schema,
   });
 
   return (

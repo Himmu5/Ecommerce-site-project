@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import SearchNotFound from "./Component/SearchNotFound";
 import SignIn from './Validation/SignIn'
 import SignUp from "./Validation/SignUp";
-import ResetPassword from './validation/ResetPassword'
+import ResetPassword from "./Validation/ResetPassword";
 import Cart from "../src/Component/Cart/Cart";
 
 function App() {
