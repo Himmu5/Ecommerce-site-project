@@ -46,13 +46,6 @@ export default function ProductList({ productData }) {
         return <SingleProducts data={item.data} />;
       })}
 
-      {/* 
-      
-      <SingleProducts />
-      <SingleProducts />
-      <SingleProducts />
-      <SingleProducts />
-      <SingleProducts /> */}
     </div>
   );
 }

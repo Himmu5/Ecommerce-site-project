@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillXCircleFill } from "react-icons/bs";
 import HamMenu from "../Hamburgur/HamMenu";
 import { memo } from "react";
+import Hamburger from "hamburger-react";
 
 function Nav({ total }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
@@ -18,13 +19,15 @@ function Nav({ total }) {
 
   const [hamtoggle, sethamtoggle] = useState(false);
 
-  function hamClick() {
-    if (hamtoggle == false) {
-      sethamtoggle(true);
-    } else {
+  function Toggle() {
+    if (hamtoggle == true) {
       sethamtoggle(false);
+    } else {
+      sethamtoggle(true);
     }
   }
+
+  console.log("Ham menu toggle", hamtoggle);
 
   return (
     <div>
@@ -37,7 +40,7 @@ function Nav({ total }) {
             />
           </Link>
           <div className="flex  items-center space-x-3">
-            <div className="hidden md:block duration-500">
+            <div className="hidden md:block  duration-500">
               <div className=" flex space-x-6">
                 <p>HOME</p>
                 <p>ALL PRODUCTS</p>
@@ -55,18 +58,10 @@ function Nav({ total }) {
               </span>
               <BiCart className="text-5xl " />
             </Link>
-            {hamtoggle && (
-              <BsFillXCircleFill
-                className="text-4xl  text-red-500  sm:hidden hover:cursor-pointer"
-                onClick={hamClick}
-              />
-            )}
-            {!hamtoggle && (
-              <GiHamburgerMenu
-                className="text-4xl bg-red-500 text-white pl-1 pr-1 pt-1 pb-1 sm:hidden duration-500 hover:cursor-pointer"
-                onClick={hamClick}
-              />
-            )}
+
+            <div  onClick={Toggle} className="sm:hidden">
+              <Hamburger />
+            </div>
           </div>
         </div>
       </div>

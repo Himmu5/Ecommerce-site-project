@@ -13,7 +13,8 @@ import ResetPassword from "./Validation/ResetPassword";
 import Cart from "../src/Component/Cart/Cart";
 
 function App() {
-  let oldData = localStorage.getItem("my-cart") || "{}";
+  const [oldData,setoldDate]=useState(localStorage.getItem("my-cart") || "{}");
+
   let SavedData = JSON.parse(oldData);
   const [totalproduct, settotalproduct] = useState(SavedData);
 
