@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 
-export default function SingleProduct({data}) {
+export default function SingleProduct({data , setoldData}) {
 
   const{id , title , price, thumbnail }=data;
  
@@ -10,15 +10,18 @@ export default function SingleProduct({data}) {
       
   function DeleteItem(){
     delete localdata[id];
+    
     localStorage.setItem("my-cart" ,JSON.stringify(localdata));
+    setoldData(JSON.parse(localStorage.getItem('my-cart')));
   }
+  
 
 
   return (
     <>
       <div className=" text-gray-600 font-bold xl:hidden bg-white">
-        <div className="flex justify-end border-2 border-b-0 p-2">
-          <AiOutlineCloseCircle className="text-3xl " onClick={DeleteItem} />
+        <div className="flex justify-end border-2 border-b-0 p-2 ">
+          <AiOutlineCloseCircle className="text-3xl hover:cursor-pointer" onClick={DeleteItem} />
         </div>
         <div className="flex justify-center border-2 border-b-0 p-2 sm:hidden">
           <img

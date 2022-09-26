@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import SingleProducts from "./SingleProduct";
 import { SingleProduct } from "../Api";
 import { useState } from "react";
@@ -8,24 +8,37 @@ export default function ProductList({ productData }) {
 
   // console.log(localdata);
 
+  const [olddata, setoldData] = useState([]);
+
+  
+
+  console.log("olddata aaya", olddata);
+
+  const [pdata, setPData] = useState(productData);
 
   const [response, setResponse] = useState([]);
-  console.log("Prop Drilling Done", productData);
 
-  let keys = Object.keys(productData);
+  useEffect(
+    function () {
+      setPData({ ...olddata });
+    },
+    [olddata]
+  );
 
-  // console.log('key hai isme',productData);
+  console.log(pdata, "pdat is here");
 
+  let keys = Object.keys(pdata);
+
+  console.log('new Keys',keys);
   let promises = [];
   useEffect(function () {
     promises = keys.map(function (key) {
       return SingleProduct(key);
     });
-
-    Promise.all(promises).then(function (response) {
-      setResponse(response);
+    Promise.all(promises).then(function (result) {
+      setResponse(result);
     });
-  },[]);
+  }, []);
 
   return (
     <div className=" border-2 max-w-5xl mx-auto bg-white ">
@@ -43,9 +56,8 @@ export default function ProductList({ productData }) {
       </div>
 
       {response.map(function (item) {
-        return <SingleProducts data={item.data} />;
+        return <SingleProducts key={item.data.id} data={item.data} setoldData={setoldData} />;
       })}
-
     </div>
   );
 }

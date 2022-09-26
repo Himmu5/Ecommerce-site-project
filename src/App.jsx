@@ -5,17 +5,20 @@ import Card from "./Component/Cards/Card";
 import { Routes, Route } from "react-router-dom";
 import Loading from "./Component/Cards/Loading";
 import DataNotFound from "./Component/DataNotFound";
-import { useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import SearchNotFound from "./Component/SearchNotFound";
 import SignIn from './Validation/SignIn'
 import SignUp from "./Validation/SignUp";
 import ResetPassword from "./Validation/ResetPassword";
 import Cart from "../src/Component/Cart/Cart";
 
-function App() {
-  const [oldData,setoldDate]=useState(localStorage.getItem("my-cart") || "{}");
 
-  let SavedData = JSON.parse(oldData);
+const ContextData=createContext();
+
+function App() {
+  const [oldData,setoldData]=useState(JSON.parse(localStorage.getItem("my-cart") || "{}"));
+
+  let SavedData = oldData;
   const [totalproduct, settotalproduct] = useState(SavedData);
 
 
@@ -40,6 +43,7 @@ function App() {
         <Nav total={CartTotal} />
 
         <div className="">
+        <ContextData.Provider value={setoldData}>
           <Routes>
             <Route index element={<MainContant />}></Route>
             <Route
@@ -58,6 +62,7 @@ function App() {
             <Route path="/component/validation/ResetPassword" element={<ResetPassword/>}></Route>
             
           </Routes>
+          </ContextData.Provider>
         </div>
 
         <Footer />
