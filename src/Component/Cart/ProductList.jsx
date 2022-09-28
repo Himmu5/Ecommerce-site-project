@@ -3,11 +3,9 @@ import SingleProducts from "./SingleProduct";
 import { SingleProduct } from "../Api";
 import { useState } from "react";
 
-export default function ProductList({ productData }) {
-  // const[promises ,setpromises]=useState([]);
+export default function ProductList({ productData ,UpdateCart ,setInput}) {
 
-  // console.log(localdata);
-
+  console.log('prouct Data Updated',productData);
 
   const [response, setResponse] = useState([]);
   console.log("Prop Drilling Done", productData);
@@ -25,7 +23,7 @@ export default function ProductList({ productData }) {
     Promise.all(promises).then(function (response) {
       setResponse(response);
     });
-  },[]);
+  },[productData]);
 
   return (
     <div className=" border-2 max-w-5xl mx-auto bg-white ">
@@ -43,7 +41,7 @@ export default function ProductList({ productData }) {
       </div>
 
       {response.map(function (item) {
-        return <SingleProducts data={item.data} />;
+        return <SingleProducts setInput={setInput} UpdateCart={UpdateCart} data={item.data} />;
       })}
 
       {/* 

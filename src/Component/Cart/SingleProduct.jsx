@@ -1,26 +1,37 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
+import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-export default function SingleProduct({data}) {
+export default function SingleProduct({data ,UpdateCart,setInput}) {
 
+  let localdata=JSON.parse(localStorage.getItem('my-cart'));
+  
+  const[InputUpdate,setInputUpdate]=useState(localdata);
+  
   const{id , title , price, thumbnail }=data;
 
   
-  let localdata=JSON.parse(localStorage.getItem('my-cart'));
-  console.log( ' local data' ,  localdata);
-
-
   function DeleteItem(){
     delete localdata[id];
-    localStorage.setItem("my-cart" ,JSON.stringify(localdata));
+    UpdateCart(localdata);
+  }
+  
+  function handleChange(e){
+    const data={...localdata , [id] : +e.target.value};
+    setInputUpdate(data);
+    
   }
 
+  setInput(InputUpdate);
+  
+ 
+  
 
   return (
     <>
       <div className=" text-gray-600 font-bold xl:hidden bg-white">
         <div className="flex justify-end border-2 border-b-0 p-2">
-          <AiOutlineCloseCircle className="text-3xl " />
+          <AiOutlineCloseCircle className="text-3xl hover:text-red-500 hover:cursor-pointer" onClick={DeleteItem} />
         </div>
         <div className="flex justify-center border-2 border-b-0 p-2 sm:hidden">
           <img
@@ -39,11 +50,11 @@ export default function SingleProduct({data}) {
         </div>
         <div className="flex justify-between border-2 border-b-0 p-2">
           <p>Quantity:</p>
-          <input type="number" value={localdata[id]} className="border-2 w-12" />
+          <input type="number" onChange={handleChange} value={InputUpdate[id]} className="border-2 w-12" />
         </div>
         <div className="flex justify-between border-2  p-2">
           <p>Subtotal:</p>
-          <p>$15.00</p>
+          <p>${InputUpdate[id] * price }</p>
         </div>
 
         
@@ -62,8 +73,8 @@ export default function SingleProduct({data}) {
           </div>
 
           <p>${price}.00</p>
-          <input type="number" value={localdata[id]} className="w-16 border-2" />
-          <p>${localdata[id] * price }</p>
+          <input type="number" onChange={handleChange} value={InputUpdate[id]} min="1" className="w-16 border-2" />
+          <p>${InputUpdate[id] * price }</p>
         </div>
       </div>
     </>

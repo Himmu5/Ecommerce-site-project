@@ -5,12 +5,13 @@ import Card from "./Component/Cards/Card";
 import { Routes, Route } from "react-router-dom";
 import Loading from "./Component/Cards/Loading";
 import DataNotFound from "./Component/DataNotFound";
-import { useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import SearchNotFound from "./Component/SearchNotFound";
 import SignIn from './Validation/SignIn'
 import SignUp from "./Validation/SignUp";
 import ResetPassword from "./Validation/ResetPassword";
 import Cart from "../src/Component/Cart/Cart";
+
 
 function App() {
   let oldData = localStorage.getItem("my-cart") || "{}";
@@ -20,6 +21,7 @@ function App() {
 
   // console.log(totalproduct);
 
+
   function addToCart(productId, count) {
     const olddata = totalproduct[productId] || 0;
     const newCart = { ...totalproduct, [productId]: +count + +olddata };
@@ -27,7 +29,8 @@ function App() {
   }
 
   localStorage.setItem("my-cart", JSON.stringify(totalproduct));
-  // console.log(totalproduct);
+  
+  console.log(' T Product ',totalproduct);
 
   let CartTotal = Object.keys(totalproduct).reduce((output, current) => {
     return output + totalproduct[current];
@@ -39,7 +42,8 @@ function App() {
         <Nav total={CartTotal} />
 
         <div className="">
-          <Routes>
+        
+        <Routes>
             <Route index element={<MainContant />}></Route>
             <Route
               path="/Component/Cards/Card/:id/"
@@ -48,7 +52,7 @@ function App() {
             <Route path="*" element={<DataNotFound />}></Route>
             <Route
               path="/component/Cart/Cart"
-              element={<Cart productData={totalproduct} />}
+              element={<Cart productData={totalproduct} UpdateCart={settotalproduct} />}
             ></Route>
            
 
