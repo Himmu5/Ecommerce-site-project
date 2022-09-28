@@ -9,7 +9,7 @@ import ContantCard from "./ContantCard";
   return (
     <>
     
-    <div className="grid sm:grid-cols-3 gap-9 sm:p-20 sm:pt-5 sm:pb-5 mt-5 mb-5">
+    <div className="grid sm:grid-cols-3 gap-9  sm:p-20 sm:pt-5 sm:pb-5 mt-5 mb-5">
      
       {
       data.map(function(item){

@@ -13,9 +13,15 @@ import ResetPassword from "./Validation/ResetPassword";
 import Cart from "../src/Component/Cart/Cart";
 
 
+<<<<<<< HEAD
+=======
+const ContextData=createContext();
+
+>>>>>>> cartUpdate
 function App() {
-  let oldData = localStorage.getItem("my-cart") || "{}";
-  let SavedData = JSON.parse(oldData);
+  const [oldData,setoldData]=useState(JSON.parse(localStorage.getItem("my-cart") || "{}"));
+
+  let SavedData = oldData;
   const [totalproduct, settotalproduct] = useState(SavedData);
 
 
@@ -42,8 +48,13 @@ function App() {
         <Nav total={CartTotal} />
 
         <div className="">
+<<<<<<< HEAD
         
         <Routes>
+=======
+        <ContextData.Provider value={setoldData}>
+          <Routes>
+>>>>>>> cartUpdate
             <Route index element={<MainContant />}></Route>
             <Route
               path="/Component/Cards/Card/:id/"
@@ -61,6 +72,7 @@ function App() {
             <Route path="/component/validation/ResetPassword" element={<ResetPassword/>}></Route>
             
           </Routes>
+          </ContextData.Provider>
         </div>
 
         <Footer />

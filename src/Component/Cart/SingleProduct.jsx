@@ -1,14 +1,23 @@
+<<<<<<< HEAD
 import React, { useCallback, useContext } from "react";
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export default function SingleProduct({data ,UpdateCart,setInput}) {
+=======
+import React, { useCallback, useEffect } from "react";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
+
+export default function SingleProduct({data , setoldData}) {
+>>>>>>> cartUpdate
 
   let localdata=JSON.parse(localStorage.getItem('my-cart'));
   
   const[InputUpdate,setInputUpdate]=useState(localdata);
   
   const{id , title , price, thumbnail }=data;
+<<<<<<< HEAD
 
   
   function DeleteItem(){
@@ -20,7 +29,18 @@ export default function SingleProduct({data ,UpdateCart,setInput}) {
     const data={...localdata , [id] : +e.target.value};
     setInputUpdate(data);
     
+=======
+ 
+  let localdata=JSON.parse(localStorage.getItem('my-cart'));
+      
+  function DeleteItem(){
+    delete localdata[id];
+    
+    localStorage.setItem("my-cart" ,JSON.stringify(localdata));
+    setoldData(JSON.parse(localStorage.getItem('my-cart')));
+>>>>>>> cartUpdate
   }
+  
 
   setInput(InputUpdate);
   
@@ -30,8 +50,13 @@ export default function SingleProduct({data ,UpdateCart,setInput}) {
   return (
     <>
       <div className=" text-gray-600 font-bold xl:hidden bg-white">
+<<<<<<< HEAD
         <div className="flex justify-end border-2 border-b-0 p-2">
           <AiOutlineCloseCircle className="text-3xl hover:text-red-500 hover:cursor-pointer" onClick={DeleteItem} />
+=======
+        <div className="flex justify-end border-2 border-b-0 p-2 ">
+          <AiOutlineCloseCircle className="text-3xl hover:cursor-pointer" onClick={DeleteItem} />
+>>>>>>> cartUpdate
         </div>
         <div className="flex justify-center border-2 border-b-0 p-2 sm:hidden">
           <img
