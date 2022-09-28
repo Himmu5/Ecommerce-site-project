@@ -3,47 +3,32 @@ import SingleProducts from "./SingleProduct";
 import { SingleProduct } from "../Api";
 import { useState } from "react";
 
-export default function ProductList({ productData ,UpdateCart ,setInput}) {
+export default function ProductList({ productData, UpdateCart, setInput }) {
+  console.log("prouct Data Updated", productData);
 
-<<<<<<< HEAD
-  console.log('prouct Data Updated',productData);
-=======
   const [olddata, setoldData] = useState([]);
-
-  
 
   console.log("olddata aaya", olddata);
 
-  const [pdata, setPData] = useState(productData);
->>>>>>> cartUpdate
-
   const [response, setResponse] = useState([]);
 
+  // console.log(pdata, "pdat is here");
+
+  let keys = Object.keys(productData);
+
+  console.log("new Keys", keys);
+  let promises = [];
   useEffect(
     function () {
-      setPData({ ...olddata });
+      promises = keys.map(function (key) {
+        return SingleProduct(key);
+      });
+      Promise.all(promises).then(function (result) {
+        setResponse(result);
+      });
     },
-    [olddata]
+    [productData]
   );
-
-  console.log(pdata, "pdat is here");
-
-  let keys = Object.keys(pdata);
-
-  console.log('new Keys',keys);
-  let promises = [];
-  useEffect(function () {
-    promises = keys.map(function (key) {
-      return SingleProduct(key);
-    });
-    Promise.all(promises).then(function (result) {
-      setResponse(result);
-    });
-<<<<<<< HEAD
-  },[productData]);
-=======
-  }, []);
->>>>>>> cartUpdate
 
   return (
     <div className=" border-2 max-w-5xl mx-auto bg-white ">
@@ -61,11 +46,15 @@ export default function ProductList({ productData ,UpdateCart ,setInput}) {
       </div>
 
       {response.map(function (item) {
-<<<<<<< HEAD
-        return <SingleProducts setInput={setInput} UpdateCart={UpdateCart} data={item.data} />;
-=======
-        return <SingleProducts key={item.data.id} data={item.data} setoldData={setoldData} />;
->>>>>>> cartUpdate
+        return (
+          <SingleProducts
+            setInput={setInput}
+            UpdateCart={UpdateCart}
+            data={item.data}
+          />
+        );
+
+        // return <SingleProducts key={item.data.id} data={item.data} setoldData={setoldData} />;
       })}
     </div>
   );

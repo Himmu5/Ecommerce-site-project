@@ -3,7 +3,7 @@ import ProductList from "./ProductList";
 import CartTotal from "./CartTotal";
 
 function Cart({ productData, UpdateCart }) {
-  // console.log('Updated Data' ,productData );
+  console.log('Updated Data' ,productData );
 
   const[input , setInput]=useState({});
   function getData() {
