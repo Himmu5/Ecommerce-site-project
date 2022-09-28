@@ -70,8 +70,8 @@ function MainContant() {
   // console.log(ApiData.length);
 
   return data.length > 1 ? (
-    <div className="p-10">
-      <div className="ml-5 mr-5 sm:max-w-6xl sm:mx-auto sm:pl-5 sm:pr-5 sm:pt-5 sm:pb-5  mt-16 mb-16 bg-white shadow-md ">
+    <div className="px-5">
+      <div className="mx-1 sm:max-w-6xl sm:mx-auto sm:pl-5 sm:pr-5 sm:pt-5 sm:pb-5  mt-16 mb-16 bg-white shadow-md ">
         <div className="p-3 sm:p-20 sm:pt-10 sm:pb-0 space-y-5 ">
           <h1 className="text-3xl text-red-400"> Shop</h1>
           <div className="sm:flex sm:justify-between space-y-3 sm:space-y-0">
