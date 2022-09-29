@@ -12,6 +12,9 @@ import { useMemo } from "react";
 function MainContant() {
   const [data, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [Query, setQuery] = useState("default Sort");
+  const [searchQuery, setsearchQuery] = useState("");
+
   console.log("MainContant");
 
   let ApiData = data;
@@ -28,37 +31,29 @@ function MainContant() {
       });
   }, []);
 
-  const [Query, setQuery] = useState("default Sort");
-
-  const [searchQuery, setsearchQuery] = useState("");
-
-  useMemo(function () {
-    ApiData = ApiData.filter(function (item) {
-      return item.title.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
-    });
-  },[searchQuery]);
+  ApiData = ApiData.filter(function (item) {
+    return item.title.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
+  });
 
   // if(ApiData.length==0){
   //     return <Loading/>
   // }
 
-    useCallback(function (){
-      if (Query == "LtoH") {
-        ApiData.sort(function (x, y) {
-          return x.price - y.price;
-        });
-      } else if (Query == "HtoL") {
-        ApiData.sort(function (x, y) {
-          return y.price - x.price;
-        });
-      } else if (Query == "name") {
-        ApiData.sort(function (x, y) {
-          return y.title < x.title ? 1 : -1;
-        });
-      }
-    },[Query]);
-      
-    
+  
+    if (Query === "LtoH") {
+      ApiData.sort(function (x, y) {
+        return x.price - y.price;
+      });
+    } else if (Query === "HtoL") {
+      ApiData.sort(function (x, y) {
+        return y.price - x.price;
+      });
+    } else if (Query === "name") {
+      ApiData.sort(function (x, y) {
+        return y.title < x.title ? 1 : -1;
+      });
+    }
+ 
 
   function HandleSearch(e) {
     setsearchQuery(e.target.value);
@@ -67,7 +62,7 @@ function MainContant() {
     setQuery(e.target.value);
   }
 
-  // console.log(ApiData.length);
+  console.log(ApiData);
 
   return data.length > 1 ? (
     <div className="px-5">
@@ -119,4 +114,4 @@ function MainContant() {
   );
 }
 
-export default memo(MainContant);
+export default MainContant;

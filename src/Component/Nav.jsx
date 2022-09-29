@@ -30,7 +30,7 @@ function Nav({ total }) {
   console.log("Ham menu toggle", hamtoggle);
 
   return (
-    <div>
+    <div className="sticky">
       <div className=" bg-white pt-6 pb-6  pl-3 pr-3 shadow-md ">
         <div className="flex justify-between items-center  max-w-6xl mx-auto">
           <Link to="/">
@@ -42,11 +42,11 @@ function Nav({ total }) {
           <div className="flex  items-center space-x-3">
             <div className="hidden md:block  duration-500">
               <div className=" flex space-x-6">
-                <p>HOME</p>
-                <p>ALL PRODUCTS</p>
-                <p>ABOUT</p>
-                <p>CONTACT</p>
-                <Link to={"component/validation/SignIn"}>ACCOUNT</Link>
+                <Link to='/'><p className="hover:text-red-400 hover:scale-105">HOME</p></Link>
+                <p className="hover:text-red-400 hover:scale-105">ALL PRODUCTS</p>
+                <p className="hover:text-red-400 hover:scale-105">ABOUT</p>
+                <p className="hover:text-red-400 hover:scale-105">CONTACT</p>
+                <Link to={"component/validation/SignIn" } className="hover:text-red-400 hover:scale-105">ACCOUNT</Link>
               </div>
             </div>
             <Link

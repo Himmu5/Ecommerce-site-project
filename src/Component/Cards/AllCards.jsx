@@ -2,9 +2,9 @@ import React from "react";
 import { memo } from "react";
 import ContantCard from "./ContantCard";
 
+
  function AllCards({data}) {
-  
-  console.log("AllCards");
+ 
   
   return (
     <>

@@ -32,7 +32,7 @@ import * as Yup from 'yup'
 
   return (
     <div className="">
-      <div className= "my-10 max-w-5xl mx-auto space-y-5 p-4 sm:p-20 bg-white">
+      <div className= "mx-3 my-10 max-w-5xl sm:mx-10 md:mx-auto space-y-5 p-4 sm:p-20 bg-white">
         <h1 className="text-2xl">Sign Up</h1>
         <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-3 text-sm border p-6">
           <input
