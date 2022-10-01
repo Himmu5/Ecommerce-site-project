@@ -13,7 +13,7 @@ export default function SingleProduct({ product, quantity, onQuantityChange ,onR
     onRemove(product.id);
   }
 
-  return (
+  return  (
     <>
       <div className=" text-gray-600 font-bold xl:hidden bg-white">
         <div className="flex justify-end border-2 border-b-0 p-2">
