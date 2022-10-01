@@ -30,8 +30,16 @@ function App() {
     settotalproduct(newCart);
   }
 
+
   localStorage.setItem("my-cart", JSON.stringify(totalproduct));
-  
+ 
+  function UpdateCart(newCart){
+    settotalproduct(newCart);
+    const CartString=newCart;
+    localStorage.setItem("my-cart", JSON.stringify(CartString));
+
+    
+  }
   // console.log(' T Product ',totalproduct);
 
   let CartTotal = Object.keys(totalproduct).reduce((output, current) => {

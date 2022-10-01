@@ -1,35 +1,35 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import SingleProducts from "./SingleProduct";
-import { SingleProduct } from "../Api";
 import { useState } from "react";
 
-export default function ProductList({ productData, UpdateCart, setInput }) {
-  console.log("prouct Data Updated", productData);
+export default function ProductList({ productData, UpdateCart,response}) {
 
-  const [olddata, setoldData] = useState([]);
+  
+  const [localCart, setlocalCart] = useState(productData);
 
-  console.log("olddata aaya", olddata);
-
-  const [response, setResponse] = useState([]);
-
-  // console.log(pdata, "pdat is here");
-
-  let keys = Object.keys(productData);
-
-  console.log("new Keys", keys);
-  let promises = [];
   useEffect(
     function () {
-      promises = keys.map(function (key) {
-        return SingleProduct(key);
-      });
-      Promise.all(promises).then(function (result) {
-        setResponse(result);
-      });
+      setlocalCart(productData);
     },
     [productData]
   );
 
+  function handleRemove(productid){
+    const cart ={...productData}
+    delete cart[productid];
+    UpdateCart(cart);
+  }
+  
+  function handleChange( productId , newValue ){
+    const newLocalCart = {...localCart , [productId]:newValue };
+    setlocalCart(newLocalCart);
+  }
+
+  function updateMyCart(){
+    UpdateCart(localCart)
+  }
+
+  
   return (
     <div className=" border-2 max-w-5xl mx-auto bg-white ">
       <div className="hidden xl:block">
@@ -46,16 +46,37 @@ export default function ProductList({ productData, UpdateCart, setInput }) {
       </div>
 
       {response.map(function (item) {
+        
         return (
+          
           <SingleProducts
-            setInput={setInput}
-            UpdateCart={UpdateCart}
-            data={item.data}
+            onRemove={handleRemove}
+            onQuantityChange={handleChange}
+            product={item.data}
+            quantity={localCart[item.data.id]}
           />
         );
 
-        // return <SingleProducts key={item.data.id} data={item.data} setoldData={setoldData} />;
+        
       })}
+        <div className=" p-2 border-2 border-t-0 space-y-2 xl:space-y-0 xl:p-5 xl:flex xl:justify-between">
+        <div className="space-x-3 flex justify-between xl:justify-start ">
+          <input
+            type="text"
+            placeholder="Coupon code"
+            className="pl-3 pr-3 pt-1 pb-1 border-2"
+          />
+          <button className="pl-4 pr-4 pt-1 pb-1 bg-red-500 text-white  rounded-md">
+            APPLY COUPON
+          </button>
+        </div>
+        <button
+          onClick={updateMyCart}
+          className="flex justify-center w-full md:w-56 text-white bg-red-600 pt-2 pb-2 xl:pl-6 xl:pr-6 rounded-md cursor-pointer"
+        >
+          UPDATE CART
+        </button>
+      </div>
     </div>
   );
 }
