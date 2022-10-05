@@ -1,100 +1,128 @@
-import { useFormik } from "formik";
+import {  withFormik } from "formik";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import * as Yup from 'yup'
+import * as Yup from "yup";
+import Input from "./Input";
+import axios from "axios";
 
- function SignUp() {
-    function submit(){
-        console.log('Data is :' , formik.values.FULLNAME , formik.values.EMAIL, formik.values.USERNAME, formik.values.PASSWORD , formik.values.CONFIRM);
-    }
+const initialValues = {
+  FULLNAME: "",
+  EMAIL: "",
+  USERNAME: "",
+  PASSWORD: "",
+  CONFIRM: "",
+};
 
-    const schema =Yup.object().shape({
-        FULLNAME:Yup.string().required(),
-        EMAIL:Yup.string().required(),
-        USERNAME:Yup.string().required(),
-        PASSWORD:Yup.string().min(6).required(),
-        CONFIRM:Yup.string().min(6).required() 
-    });
+function submit(values) {
+  console.log('Submit Function ',values);
+  axios.post("https://myeasykart.codeyogi.io/signup",{fullName:values.FULLNAME,email:values.Email,password:values.PASSWORD}).then((response)=>{
+    console.log("Response AAgya" , response);
+  }).catch((e)=>{
+    console.log("error" ,e);
+  })
+}
 
+const schema = Yup.object().shape({
+  FULLNAME: Yup.string().required(),
+  EMAIL: Yup.string().required(),
+  USERNAME: Yup.string().required(),
+  PASSWORD: Yup.string().min(6).required(),
+  CONFIRM: Yup.string().min(6).required(),
+});
 
-  const formik = useFormik({
-    initialValues:{
-        FULLNAME:"",
-        EMAIL:"",
-        USERNAME:"",
-        PASSWORD:"",
-        CONFIRM:""
-    },
-    onSubmit:submit,
-    validationSchema:schema,
-    
-  });
-
+function SignUp({
+  handleSubmit,
+  handleChange,
+  handleBlur,
+  touched,
+  errors,
+  values
+}) {
   return (
     <div className="">
-      <div className= "mx-3 my-10 max-w-5xl sm:mx-10 md:mx-auto space-y-5 p-4 sm:p-20 bg-white">
+      <div className="mx-3 my-10 max-w-5xl sm:mx-10 md:mx-auto space-y-5 p-4 sm:p-20 bg-white">
         <h1 className="text-2xl">Sign Up</h1>
-        <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-3 text-sm border p-6">
-          <input
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col space-y-3 text-sm border p-6"
+        >
+          <Input
+            placeholder="FULL NAME"
             type="text"
             name="FULLNAME"
-            value={formik.values.FULLNAME}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="FULL NAME"
-            className="px-4 py-2 border"
+            value={values.FULLNAME}
+            onChange={handleChange}
+            touched={touched.FULLNAME}
+            onBlur={handleBlur}
+            errors={errors.FULLNAME}
           />
-          { formik.touched.FULLNAME && formik.errors.FULLNAME&&<div className="text-red-500">{formik.errors.FULLNAME}</div>}
-          <input
+
+          <Input
             type="email"
             name="EMAIL"
-            value={formik.values.EMAIL}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={values.EMAIL}
+            onChange={handleChange}
+            touched={touched.EMAIL}
+            onBlur={handleBlur}
             placeholder="ENTER THE EMAIL"
-            className="px-4 py-2 border"
+            errors={errors.EMAIL}
+            
           />
-          {formik.touched.EMAIL && formik.errors.EMAIL&&<div className="text-red-500">{formik.errors.EMAIL}</div>}
-          <input
+
+          <Input
             type="text"
             name="USERNAME"
-            value={formik.values.USERNAME}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={values.USERNAME}
+            onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="USERNAME"
-            className="px-4 py-2 border"
+            errors={errors.USERNAME}
+            touched={touched.USERNAME}
           />
-          {formik.touched.USERNAME&&formik.errors.USERNAME&&<div className="text-red-500">{formik.errors.USERNAME}</div>}
 
-          <input
+          <Input
             type="password"
             name="PASSWORD"
-            value={formik.values.PASSWORD}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            value={values.PASSWORD}
+            onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="ENTER THE PASSWORD"
-            className="px-4 py-2 border"
+            errors={errors.PASSWORD}
+            touched={touched.PASSWORD}
           />
-          {formik.touched.PASSWORD&&formik.errors.PASSWORD&&<div className="text-red-500">{formik.errors.PASSWORD}</div>}
 
-          <input
+          <Input
             type="password"
             name="CONFIRM"
-            value={formik.values.CONFIRM}
-            onChange={formik.handleChange}
+            value={values.CONFIRM}
+            onChange={handleChange}
             placeholder="CONFIRM PASSWORD"
             className="px-4 py-2 border"
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            errors={errors.CONFIRM}
+            touched={touched.CONFIRM}
           />
-          {formik.touched.CONFIRM&&formik.errors.CONFIRM&&<div className="text-red-500">{formik.errors.CONFIRM}</div>}
-          
-          <button type="submit" className="px-4 py-2 bg-red-500 font-bold text-white text-xl">
+
+          <button
+            type="submit"
+            className="px-4 py-2 bg-red-500 font-bold text-white text-xl"
+          >
             SignUp
           </button>
-          <Link to="/component/validation/SignIn" className="text-red-500">Already Have an Account ?</Link>
+          <Link to="/component/validation/SignIn" className="text-red-500">
+            Already Have an Account ?
+          </Link>
         </form>
       </div>
     </div>
   );
 }
-export default memo(SignUp);
+
+const myHoc = withFormik({
+  validationSchema: schema,
+  initialValues: initialValues,
+  handleSubmit: submit,
+});
+const Signup = myHoc(SignUp);
+
+export default Signup;

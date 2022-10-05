@@ -1,70 +1,82 @@
-import { useFormik } from "formik";
-import React, { memo } from "react";
+import { useFormik, withFormik } from "formik";
+import React from "react";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import Input from "./Input";
+import axios from "axios";
+import { UserContext } from '../App'
+import { useContext } from "react";
 
+const initialValues = {
+  email: "  ",
+  password: "",
+};
 
-function SignIn() {
-  const schema = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().min(6).required(),
-  });
+const schema = Yup.object().shape({
+  email: Yup.string().email().required(),
+  password: Yup.string().min(6).required(),
+});
 
+function Submit(values , bag) {
+  console.log("Data is sending ", values);
+  axios
+    .post("https://myeasykart.codeyogi.io/login", {
+      email: values.email,
+      password: values.password,
+    })
+    .then((response) => {
+      
+      const {user , token}=response.data;
+      bag.props.setUser(user);
+      localStorage.setItem("token",token);
 
-  function Submit() {
-    console.log(
-      "Data is sending ",
-      formik.values.email,
-      formik.values.password
-    );
-  }
+    })
+    .catch((e) => {
+      console.log(e.message, "Error");
+    });
+}
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: Submit,
-    validationSchema: schema,
-  });
+function SignIn({
+  handleSubmit,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+}) {
 
+ 
   return (
     <div className="shadow-xl mx-3 my-10 sm:p-20 p-4 space-y-5  text-sm font-bold bg-white text-gray-700 max-w-5xl md:mx-auto md:text-base">
-      
       <h1 className="text-2xl ">Login</h1>
       <form
         className="p-6 flex flex-col space-y-3 border"
-        onSubmit={formik.handleSubmit}
+        onSubmit={handleSubmit}
       >
         {/* <AiOutlineUser className="text-2xl relative top-[78px] left-3 " /> */}
         <label htmlFor="email">Username or email address *</label>
-        <input
+        <Input
           id="email"
           type="email"
-          className="border px-4 py-2"
-          name="email"
-          value={formik.values.email}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          placeholder=""
+          name={"email"}
+          value={values.email}
+          onChange={handleChange}
+          errors={errors.email}
+          touched={touched.email}
+          onBlur={handleBlur}
         />
-        {formik.touched.email && formik.errors.email && (
-          <div className="text-red-400 ">{formik.errors.email}</div>
-        )}
         <label htmlFor="pass">Password</label>
-        <input
+        <Input
           id="pass"
+          name={"password"}
           type="password"
-          className="border px-4 py-2"
-          name="password"
-          value={formik.values.password}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          value={values.password}
+          onChange={handleChange}
+          errors={errors.password}
+          touched={touched.password}
+          onBlur={handleBlur}
         />
-        {/* <RiLockPasswordLine className="text-2xl relative bottom-[44px] left-3 " /> */}
-        {formik.touched.password && formik.errors.password && (
-          <div className="text-red-400 ">{formik.errors.password}</div>
-        )}
+
         <div className="space-y-1">
           <div className="flex space-x-2">
             <input type="checkbox" id="remind" />
@@ -90,4 +102,12 @@ function SignIn() {
     </div>
   );
 }
-export default memo(SignIn);
+
+const myHOC = withFormik({
+  validationSchema: schema,
+  initialValues: initialValues,
+  handleSubmit: Submit,
+});
+const Login = myHOC(SignIn);
+
+export default Login;

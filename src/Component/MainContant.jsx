@@ -1,13 +1,12 @@
-import React, { memo, useCallback, useEffect } from "react";
+import React, { memo, useCallback, useContext, useEffect } from "react";
 import AllCards from "./Cards/AllCards";
 import ButtonNumber from "./NextButton/buttonNumber";
 import { ApiDataDummy } from "./Api";
 import { useState } from "react";
 import Loading from "./Cards/Loading";
 import DataNotFound from "./DataNotFound";
-import { BiSearch } from "react-icons/bi";
 import SearchNotFound from "./SearchNotFound";
-import { useMemo } from "react";
+import {UserContext} from '../App'
 
 function MainContant() {
   const [data, setApiData] = useState([]);
@@ -16,6 +15,7 @@ function MainContant() {
   const [searchQuery, setsearchQuery] = useState("");
 
   console.log("MainContant");
+  const user=useContext(UserContext);
 
   let ApiData = data;
   useEffect(function () {
@@ -62,7 +62,6 @@ function MainContant() {
     setQuery(e.target.value);
   }
 
-  console.log(ApiData);
 
   return data.length > 1 ? (
     <div className="px-5">
