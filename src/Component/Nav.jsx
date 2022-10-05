@@ -7,7 +7,7 @@ import HamMenu from "../Hamburgur/HamMenu";
 import { memo } from "react";
 import Hamburger from "hamburger-react";
 
-function Nav({ total }) {
+function Nav({ total ,setUser }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
   // console.log('ye data local storage se aaya hai', cartvalue);
   // cartvalue= JSON.parse(cartvalue);
@@ -30,7 +30,7 @@ function Nav({ total }) {
   console.log("Ham menu toggle", hamtoggle);
 
   return (
-    <div className="sticky">
+    <div className="">
       <div className=" bg-white pt-6 pb-6  pl-3 pr-3 shadow-md ">
         <div className="flex justify-between items-center  max-w-6xl mx-auto">
           <Link to="/">
@@ -45,8 +45,9 @@ function Nav({ total }) {
                 <Link to='/'><p className="hover:text-red-400 hover:scale-105">HOME</p></Link>
                 <p className="hover:text-red-400 hover:scale-105">ALL PRODUCTS</p>
                 <p className="hover:text-red-400 hover:scale-105">ABOUT</p>
-                <p className="hover:text-red-400 hover:scale-105">CONTACT</p>
+                <p className="hover:text-red-400 hover:scale-105" >CONTACT</p>
                 <Link to={"component/validation/SignIn" } className="hover:text-red-400 hover:scale-105">ACCOUNT</Link>
+                {/* <p>Log Out</p> */}
               </div>
             </div>
             <Link
@@ -65,7 +66,7 @@ function Nav({ total }) {
           </div>
         </div>
       </div>
-      {hamtoggle && <HamMenu />}
+      {hamtoggle && <HamMenu setUser={setUser}/>}
     </div>
   );
 }

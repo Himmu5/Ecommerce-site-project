@@ -76,8 +76,8 @@ function App() {
   return (
     <>
       <div className="bg-gray-100 font-['Poppins'] selection:text-white selection:bg-red-400 ">
-        <Nav total={CartTotal} />
         <UserContext.Provider value={user}>
+        <Nav total={CartTotal} setUser={setUser} />
           <div>
             <Routes>
               <Route
