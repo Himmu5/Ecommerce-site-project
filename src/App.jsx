@@ -26,7 +26,7 @@ function App() {
       axios
         .get("https://myeasykart.codeyogi.io/me", {
           headers: {
-            Authorization: localToken,
+            Authorization: localToken
           },
         })
         .then((response) => {
@@ -42,7 +42,6 @@ function App() {
     JSON.parse(localStorage.getItem("my-cart") || "{}")
   );
 
-  console.log(user, "User");
 
   let SavedData = oldData;
   const [totalproduct, settotalproduct] = useState(SavedData);
@@ -67,8 +66,6 @@ function App() {
     return output + totalproduct[current];
   }, 0);
 
-  console.log(user, "user Are this");
-
   if (loading) {
     return <Loading />;
   }
@@ -77,7 +74,7 @@ function App() {
     <>
       <div className="bg-gray-100 font-['Poppins'] selection:text-white selection:bg-red-400 ">
         <UserContext.Provider value={user}>
-        <Nav total={CartTotal} setUser={setUser} />
+        <Nav total={CartTotal} setUser={setUser} user={user} />
           <div>
             <Routes>
               <Route
@@ -121,7 +118,7 @@ function App() {
                 path="/component/validation/SignUp"
                 element={
                   <AuthRoute>
-                    <SignUp />
+                    <SignUp setUser={setUser}/>
                   </AuthRoute>
                 }
               ></Route>

@@ -2,16 +2,16 @@ import React, { memo, useContext } from 'react'
 import {Link} from 'react-router-dom'
 import {UserContext} from '../App'
 
-function HamMenu({setUser}) {
-    const user=useContext(UserContext);
-
+function HamMenu({setUser , user }) {
+ 
    function LogOut(){
     setUser(undefined);
     localStorage.removeItem('token');
    }
     
   return (
-    <div className="border-2 sm:hidden transition-all ease-in duration-500 bg-white">
+    <div className="border-2 sm:hidden  bg-white">
+        <div className='pl-3 pt-1 pb-1  duration-500 border-b-2 hover:text-red-500'>User : {user.full_name}</div>
         <div className='pl-3 pt-1 pb-1  duration-500 border-b-2 hover:text-red-500'>
             Home
         </div>

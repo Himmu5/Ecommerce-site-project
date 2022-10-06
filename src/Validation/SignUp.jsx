@@ -13,10 +13,12 @@ const initialValues = {
   CONFIRM: "",
 };
 
-function submit(values) {
+function submit(values ,bag) {
   console.log('Submit Function ',values);
-  axios.post("https://myeasykart.codeyogi.io/signup",{fullName:values.FULLNAME,email:values.Email,password:values.PASSWORD}).then((response)=>{
-    console.log("Response AAgya" , response);
+  axios.post("https://myeasykart.codeyogi.io/signup",{fullName:values.FULLNAME,email:values.EMAIL,password:values.PASSWORD}).then((response)=>{
+    const {user , token}=response.data;
+    localStorage.setItem("token",token);
+    bag.props.setUser(user);
   }).catch((e)=>{
     console.log("error" ,e);
   })

@@ -7,7 +7,7 @@ import HamMenu from "../Hamburgur/HamMenu";
 import { memo } from "react";
 import Hamburger from "hamburger-react";
 
-function Nav({ total ,setUser }) {
+function Nav({ total, setUser ,user }) {
   // let cartvalue= localStorage.getItem("my-cart") || "{}";
   // console.log('ye data local storage se aaya hai', cartvalue);
   // cartvalue= JSON.parse(cartvalue);
@@ -42,11 +42,20 @@ function Nav({ total ,setUser }) {
           <div className="flex  items-center space-x-3">
             <div className="hidden md:block  duration-500">
               <div className=" flex space-x-6">
-                <Link to='/'><p className="hover:text-red-400 hover:scale-105">HOME</p></Link>
-                <p className="hover:text-red-400 hover:scale-105">ALL PRODUCTS</p>
+                <Link to="/">
+                  <p className="hover:text-red-400 hover:scale-105">HOME</p>
+                </Link>
+                <p className="hover:text-red-400 hover:scale-105">
+                  ALL PRODUCTS
+                </p>
                 <p className="hover:text-red-400 hover:scale-105">ABOUT</p>
-                <p className="hover:text-red-400 hover:scale-105" >CONTACT</p>
-                <Link to={"component/validation/SignIn" } className="hover:text-red-400 hover:scale-105">ACCOUNT</Link>
+                <p className="hover:text-red-400 hover:scale-105">CONTACT</p>
+                <Link
+                  to={"component/validation/SignIn"}
+                  className="hover:text-red-400 hover:scale-105"
+                >
+                  ACCOUNT
+                </Link>
                 {/* <p>Log Out</p> */}
               </div>
             </div>
@@ -60,13 +69,13 @@ function Nav({ total ,setUser }) {
               <BiCart className="text-5xl " />
             </Link>
 
-            <div  onClick={Toggle} className="sm:hidden">
+            <div onClick={Toggle} className="sm:hidden">
               <Hamburger />
             </div>
           </div>
         </div>
       </div>
-      {hamtoggle && <HamMenu setUser={setUser}/>}
+      <div className="transition-all duration-500 ">{hamtoggle && <HamMenu setUser={setUser} user={user}/>}</div>
     </div>
   );
 }
