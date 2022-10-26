@@ -5,7 +5,6 @@ import React, { useCallback, useEffect } from "react";
 export default function SingleProduct({ product, quantity, onQuantityChange ,onRemove }) {
  
   function handleChange(e) {
-    console.log( +e.target.value , 'Handle Change');
     onQuantityChange(product.id , +e.target.value);
   }
 

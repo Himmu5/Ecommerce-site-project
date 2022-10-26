@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BsFillXCircleFill } from "react-icons/bs";
 import HamMenu from "../Hamburgur/HamMenu";
 import { memo } from "react";
 import Hamburger from "hamburger-react";
+import WithUser from "../WithUser";
+import { withCart } from "./WithProvider";
 
-function Nav({ total, setUser ,user }) {
-  // let cartvalue= localStorage.getItem("my-cart") || "{}";
-  // console.log('ye data local storage se aaya hai', cartvalue);
-  // cartvalue= JSON.parse(cartvalue);
-  // // console.log( cartvalue);
-  // cartvalue= Object.keys(cartvalue).reduce((output , current)=>{
-  //   return output + cartvalue[current];
-  // } , 0)
-  // console.log(CartTotal);
-
+function Nav({ total, CartTotal , setUser, user }) {
   const [hamtoggle, sethamtoggle] = useState(false);
 
   function Toggle() {
@@ -27,7 +18,10 @@ function Nav({ total, setUser ,user }) {
     }
   }
 
-  console.log("Ham menu toggle", hamtoggle);
+  function LogOut() {
+    setUser();
+    localStorage.removeItem("token");
+  }
 
   return (
     <div className="">
@@ -56,6 +50,14 @@ function Nav({ total, setUser ,user }) {
                 >
                   ACCOUNT
                 </Link>
+                {user && (
+                  <p
+                    className="hover:text-red-400 hover:scale-105 hover:cursor-pointer font-bold "
+                    onClick={LogOut}
+                  >
+                    Log Out
+                  </p>
+                )}
                 {/* <p>Log Out</p> */}
               </div>
             </div>
@@ -64,7 +66,7 @@ function Nav({ total, setUser ,user }) {
               className="hover:bg-white hover:text-red-500"
             >
               <span className="absolute ml-8 pl-1 pr-1 text-white bg-red-400 rounded-xl self-end  hover:bg-white hover:text-red-500">
-                {total}
+                {CartTotal}
               </span>
               <BiCart className="text-5xl " />
             </Link>
@@ -75,9 +77,11 @@ function Nav({ total, setUser ,user }) {
           </div>
         </div>
       </div>
-      <div className="transition-all duration-500 ">{hamtoggle && <HamMenu setUser={setUser} user={user}/>}</div>
+      <div className="transition-all duration-500 ">
+        {hamtoggle && <HamMenu LogOut={LogOut} />}
+      </div>
     </div>
   );
 }
 
-export default memo(Nav);
+export default withCart(WithUser(memo(Nav)));

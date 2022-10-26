@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { Link, Navigate } from "react-router-dom";
 import Input from "./Input";
 import axios from "axios";
-import { UserContext } from '../App'
-import { useContext } from "react";
+import WithUser from "../WithUser";
+import WithAlert from "../WithAlert";
 
 const initialValues = {
   email: "  ",
@@ -24,15 +24,16 @@ function Submit(values , bag) {
       email: values.email,
       password: values.password,
     })
-    .then((response) => {
-      
+    .then((response) => { 
       const {user , token}=response.data;
       bag.props.setUser(user);
       localStorage.setItem("token",token);
+      bag.props.setAlert({message:'LogIn Successful' , type:'success'});
+      
 
     })
     .catch((e) => {
-      console.log(e.message, "Error");
+      bag.props.setAlert({message:"INVALID CREDENTIALS" , type: "error"});
     });
 }
 
@@ -43,8 +44,7 @@ function SignIn({
   touched,
   handleChange,
   handleBlur,
-}) {
-
+}) {  
  
   return (
     <div className="shadow-xl mx-3 my-10 sm:p-20 p-4 space-y-5  text-sm font-bold bg-white text-gray-700 max-w-5xl md:mx-auto md:text-base">
@@ -107,7 +107,5 @@ const myHOC = withFormik({
   validationSchema: schema,
   initialValues: initialValues,
   handleSubmit: Submit,
-});
-const Login = myHOC(SignIn);
-
-export default Login;
+})(SignIn)
+export default WithAlert(WithUser(myHOC));

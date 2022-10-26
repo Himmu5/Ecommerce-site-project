@@ -1,69 +1,74 @@
 import React, { memo, useCallback, useContext, useEffect } from "react";
 import AllCards from "./Cards/AllCards";
-import ButtonNumber from "./NextButton/buttonNumber";
 import { ApiDataDummy } from "./Api";
 import { useState } from "react";
 import Loading from "./Cards/Loading";
-import DataNotFound from "./DataNotFound";
 import SearchNotFound from "./SearchNotFound";
-import {UserContext} from '../App'
+import { range } from "lodash";
+import { Link, useSearchParams } from "react-router-dom";
 
 function MainContant() {
-  const [data, setApiData] = useState([]);
+  const [ApiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [Query, setQuery] = useState("default Sort");
-  const [searchQuery, setsearchQuery] = useState("");
 
-  console.log("MainContant");
-  const user=useContext(UserContext);
+  let [searchParams, setSearchParams] = useSearchParams();
 
-  let ApiData = data;
-  useEffect(function () {
-    let mydata = ApiDataDummy();
-    mydata
-      .then(function (response) {
-        console.log(response);
-        setApiData(response.data.products);
-        setLoading(false);
-      })
-      .catch(function () {
-        setLoading(false);
-      });
-  }, []);
+  const params = Object.fromEntries([...searchParams]);
 
-  ApiData = ApiData.filter(function (item) {
-    return item.title.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
-  });
+  let { searchQuery, Query, page } = params;
 
-  // if(ApiData.length==0){
-  //     return <Loading/>
-  // }
+  page = +page || 1;
+  searchQuery = searchQuery || "";
+  Query = Query || "default";
 
-  
-    if (Query === "LtoH") {
-      ApiData.sort(function (x, y) {
-        return x.price - y.price;
-      });
-    } else if (Query === "HtoL") {
-      ApiData.sort(function (x, y) {
-        return y.price - x.price;
-      });
-    } else if (Query === "name") {
-      ApiData.sort(function (x, y) {
-        return y.title < x.title ? 1 : -1;
-      });
-    }
- 
+  useEffect(
+    function () {
+      let sortBy;
+      let sortType;
+
+      if (Query == "name") {
+        sortBy = "title";
+      }
+      if (Query == "LtoH") {
+        sortBy = "price";
+      }
+      if (Query == "HtoL") {
+        sortBy = "price";
+        sortType = "desc";
+      }
+
+      let mydata = ApiDataDummy(sortBy, searchQuery, page, sortType);
+      mydata
+        .then(function (response) {
+          // meta = {...response.data};
+          setApiData(response.data);
+          setLoading(false);
+        })
+        .catch(function () {
+          setLoading(false);
+        });
+    },
+    [Query, searchQuery, page]
+  );
 
   function HandleSearch(e) {
-    setsearchQuery(e.target.value);
+    setSearchParams(
+      { ...params, searchQuery: e.target.value, page: 1 },
+      { replace: false }
+    );
   }
   function handleOnchange(e) {
-    setQuery(e.target.value);
+    setSearchParams({ ...params, Query: e.target.value }, { replace: false });
   }
 
+  function handleClick(num) {
+    setPage(num);
+  }
+  if (loading) {
+    return <Loading />;
+  }
 
-  return data.length > 1 ? (
+  return (
     <div className="px-5">
       <div className="mx-1 sm:max-w-6xl sm:mx-auto sm:pl-5 sm:pr-5 sm:pt-5 sm:pb-5  mt-16 mb-16 bg-white shadow-md ">
         <div className="p-3 sm:p-20 sm:pt-10 sm:pb-0 space-y-5 ">
@@ -96,20 +101,27 @@ function MainContant() {
           </div>
         </div>
 
-        {ApiData.length === 0 && <SearchNotFound />}
-        <AllCards data={ApiData} />
+        {ApiData.data.length === 0 && <SearchNotFound />}
+        <AllCards data={ApiData.data} />
 
         <div className="flex gap-3 p-3 pt-10 sm:pl-20">
-          <ButtonNumber value={1} />
-          <ButtonNumber value={2} />
-          <ButtonNumber value={"..."} />
+          {range(1, ApiData.meta.last_page + 1).map((item) => {
+            return (
+              <Link
+                key={item}
+                className={
+                  "px-2 py-2 bg-red-500 hover:bg-red-700 text-white " +
+                  (item == page ? " bg-blue-700 text-white " : " bg-red-500")
+                }
+                to={"?" + new URLSearchParams({ ...params, page: item })}
+              >
+                {item}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>
-  ) : loading ? (
-    <Loading />
-  ) : (
-    <DataNotFound />
   );
 }
 

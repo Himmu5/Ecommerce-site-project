@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom';
-import { UserContext } from './App'
+import { UserContext } from './Context'
+import WithUser from './WithUser';
 
-export default function UserRoute({children}) {
-    const user=useContext(UserContext);
-  
+function UserRoute({children , user }) {
+
     if(!user){
       return <Navigate to={"/component/validation/SignIn"} />;
     }  
 
   return children;
 }
+export default WithUser(UserRoute);

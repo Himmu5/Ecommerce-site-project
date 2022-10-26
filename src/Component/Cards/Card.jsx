@@ -7,8 +7,9 @@ import DataNotFound from "../DataNotFound";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import {Helmet} from "react-helmet";
 import { memo } from "react";
+import { withCart } from '../WithProvider'
 
- function Card({ CartValue }) {
+ function Card({ addToCart }) {
 
   console.log("Card !!!");
 
@@ -19,7 +20,7 @@ import { memo } from "react";
   const [count, setcount] = useState(1);
 
   function HandleAddToCart() {
-    CartValue(id, count);
+    addToCart(id, count);
     setcount(1);
   }
 
@@ -27,7 +28,7 @@ import { memo } from "react";
     let token = SingleProduct(id);
     token
       .then((response) => {
-        // console.log("Ky data aaega ",response.data);
+        
         setproduct(response.data);
         setLoading(true);
       })
@@ -131,4 +132,4 @@ import { memo } from "react";
 }
 
 
-export default memo(Card);
+export default withCart(memo(Card));

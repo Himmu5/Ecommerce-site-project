@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
 import axios from "axios";
+import WithUser from "../WithUser";
 
 const initialValues = {
   FULLNAME: "",
@@ -14,7 +15,7 @@ const initialValues = {
 };
 
 function submit(values ,bag) {
-  console.log('Submit Function ',values);
+  console.log('Submit Function ',bag);
   axios.post("https://myeasykart.codeyogi.io/signup",{fullName:values.FULLNAME,email:values.EMAIL,password:values.PASSWORD}).then((response)=>{
     const {user , token}=response.data;
     localStorage.setItem("token",token);
@@ -38,7 +39,8 @@ function SignUp({
   handleBlur,
   touched,
   errors,
-  values
+  values,
+  
 }) {
   return (
     <div className="">
@@ -127,4 +129,4 @@ const myHoc = withFormik({
 });
 const Signup = myHoc(SignUp);
 
-export default Signup;
+export default WithUser(Signup);

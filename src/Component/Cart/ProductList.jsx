@@ -1,35 +1,38 @@
 import React, { useEffect } from "react";
 import SingleProducts from "./SingleProduct";
 import { useState } from "react";
+import { withCart } from "../WithProvider";
 
-export default function ProductList({ productData, UpdateCart,response}) {
+function ProductList({ totalproduct, updateCart }) {
+  const [quantityMap, setQuantityMap] = useState({});
 
-  
-  const [localCart, setlocalCart] = useState(productData);
+  const cartToQuantityMap = () =>
+    totalproduct.reduce((m, cartItem) => {
+      return { ...m, [cartItem.product.id]: cartItem.quantity };
+    }, {});
 
   useEffect(
     function () {
-      setlocalCart(productData);
+      setQuantityMap(cartToQuantityMap());
     },
-    [productData]
+    [totalproduct]
   );
 
-  function handleRemove(productid){
-    const cart ={...productData}
-    delete cart[productid];
-    UpdateCart(cart);
-  }
-  
-  function handleChange( productId , newValue ){
-    const newLocalCart = {...localCart , [productId]:newValue };
-    setlocalCart(newLocalCart);
+  function handleRemove(productid) {
+    const newQuantityMap = { ...quantityMap };
+    delete newQuantityMap[productid];
+    updateCart(newQuantityMap);
   }
 
-  function updateMyCart(){
-    UpdateCart(localCart)
+  function handleChange(productId, newValue) {
+    const newLocalCart = { ...quantityMap, [productId]: newValue };
+    setQuantityMap(newLocalCart);
   }
 
-  
+  function updateMyCart() {
+    updateCart(quantityMap);
+  }
+
   return (
     <div className=" border-2 max-w-5xl mx-auto bg-white ">
       <div className="hidden xl:block">
@@ -45,21 +48,17 @@ export default function ProductList({ productData, UpdateCart,response}) {
         </div>
       </div>
 
-      {response.map(function (item) {
-        
+      {totalproduct.map(function (item) {
         return (
-          
           <SingleProducts
             onRemove={handleRemove}
             onQuantityChange={handleChange}
-            product={item.data}
-            quantity={localCart[item.data.id]}
+            product={item.product}
+            quantity={quantityMap[item.product.id]}
           />
         );
-
-        
       })}
-        <div className=" p-2 border-2 border-t-0 space-y-2 xl:space-y-0 xl:p-5 xl:flex xl:justify-between">
+      <div className=" p-2 border-2 border-t-0 space-y-2 xl:space-y-0 xl:p-5 xl:flex xl:justify-between">
         <div className="space-x-3 flex justify-between xl:justify-start ">
           <input
             type="text"
@@ -80,3 +79,4 @@ export default function ProductList({ productData, UpdateCart,response}) {
     </div>
   );
 }
+export default withCart(ProductList);

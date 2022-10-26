@@ -1,17 +1,17 @@
 import React, { memo, useContext } from 'react'
 import {Link} from 'react-router-dom'
-import {UserContext} from '../App'
+import {UserContext} from '../Context'
+import WithUser from '../WithUser';
 
-function HamMenu({setUser , user }) {
+function HamMenu({setUser ,user , LogOut}) {
  
-   function LogOut(){
-    setUser(undefined);
-    localStorage.removeItem('token');
-   }
+  function handleClick(){
+    LogOut();
+  }
     
   return (
     <div className="border-2 sm:hidden  bg-white">
-        <div className='pl-3 pt-1 pb-1  duration-500 border-b-2 hover:text-red-500'>User : {user.full_name}</div>
+        {user &&<div className='pl-3 pt-1 pb-1  duration-500 border-b-2 hover:text-red-500'>USER NAME : {user.full_name.toUpperCase()}</div>}
         <div className='pl-3 pt-1 pb-1  duration-500 border-b-2 hover:text-red-500'>
             Home
         </div>
@@ -28,11 +28,11 @@ function HamMenu({setUser , user }) {
             ACCOUNT
         </Link>
         {
-            user && <p className='border-t-2 pl-3 pt-1 pb-1 hover:text-red-500 hover:cursor-pointer' onClick={LogOut}>Log Out</p>
+            user && <p className='border-t-2 pl-3 pt-1 pb-1 hover:text-red-500 hover:cursor-pointer' onClick={handleClick}>Log Out</p>
         }
     </div>
   )
 }
 
 
-export default memo(HamMenu);
+export default WithUser(memo(HamMenu));
