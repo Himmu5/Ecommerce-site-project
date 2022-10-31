@@ -7,10 +7,7 @@ import { getProductByIds } from "../Component/Api";
 
 function CartProvider({ children, isLoggedIn }) {
   const [totalproduct, settotalproduct] = useState([]);
-  console.log(
-    "🚀 ~ file: CartProvider.jsx ~ line 9 ~ CartProvider ~ totalproduct",
-    totalproduct
-  );
+ 
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -51,7 +48,7 @@ function CartProvider({ children, isLoggedIn }) {
       return { ...m, [cartItem.product.id]: cartItem.quantity };
     }, {});
 
-    const olddata = totalproduct[productId] || 0;
+    const olddata = quantityMap[productId] || 0;
     const newCart = { ...quantityMap, [productId]: +count + +olddata };
     updateCart(newCart);
   }

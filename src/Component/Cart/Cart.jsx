@@ -6,10 +6,14 @@ import { getProductByIds } from "../Api";
 import { withCart } from "../WithProvider";
 import CartTotalP from "./CartTotal";
 
-function Cart() {
+function Cart({ totalproduct }) {
   // if (loading) {
   //   return <Loading />
   // }
+
+  if(totalproduct.length == 0){
+    return <SearchNotFound />
+  }
 
   return (
     <>

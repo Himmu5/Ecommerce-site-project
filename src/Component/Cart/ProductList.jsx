@@ -11,6 +11,8 @@ function ProductList({ totalproduct, updateCart }) {
       return { ...m, [cartItem.product.id]: cartItem.quantity };
     }, {});
 
+    console.log();
+
   useEffect(
     function () {
       setQuantityMap(cartToQuantityMap());
