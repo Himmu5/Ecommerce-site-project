@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { memo } from "react";
 import {
@@ -9,28 +8,18 @@ import {
 } from "react-icons/fa";
 
 function Footer() {
-  useEffect(() => {
-    axios
-      .get(
-        "https://04102e02-64bb-4fa0-b312-e7de37fa432a.mock.pstmn.io/HimanshuChauhan5566@gmail.com"
-      )
-      .then((res) => {
-        console.log("Response", res.data);
-      });
-  }, []);
-
   return (
-    <div className="bg-gray-700 text-white pt-5 pb-5 p-10">
-      <div className="my-10 flex flex-col lg:flex-row justify-around gap-5 ">
-        <div className="sm:flex justify-between ">
-          <div>
+    <div className="bg-[#415161] text-white pt-5   ">
+      <div className="my-10 flex flex-col lg:flex-row justify-around gap-5 lg:gap-0 pt-5 pb-5 p-10">
+        <div className="sm:flex justify-between gap-7">
+          <div className="sm:w-56">
             <img
               src="https://trycasuals.com/wp-content/uploads/2019/06/print-favicon-free-img-1.png"
               alt=""
             />
-            <div className="flex flex-col gap-7 mt-5">
+            <div className="flex flex-col gap-7  mt-5">
               <h1 className="text-2xl ">Custom Print Store</h1>
-              <div className="flex gap-2 px-4">
+              <div className="flex gap-7">
                 <FaFacebookSquare />
                 <FaLinkedin />
                 <FaTwitter />
@@ -39,7 +28,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 max-w-sm">
+          <div className="flex flex-col gap-5 sm:w-64 mt-5 lg:mt-0">
             <h1 className="text-2xl">
               Get in Touch with Us for the Best Quality Custom Prints &
               Supplies.
@@ -53,15 +42,15 @@ function Footer() {
         </div>
 
         <div className="sm:flex justify-between">
-          <div>
-            <h1 className="text-2xl ">Quick Links</h1>
+          <div className=" sm:w-64">
+            <h1 className="text-2xl mb-5">Quick Links</h1>
             <p>Know More About Us</p>
             <p>Visit Store</p>
             <p>Let’s Connect</p>
           </div>
 
-          <div>
-            <h1 className="text-2xl ">Important Links</h1>
+          <div className="mt-5 lg:mt-0 sm:w-64">
+            <h1 className="text-2xl mb-5">Important Links</h1>
             <p>Privacy Policy</p>
             <p>Shipping Details</p>
             <p>Terms & Conditions</p>
@@ -69,9 +58,11 @@ function Footer() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto  sm:flex justify-between">
-        <p>Copyright © 2022 | Himanshu</p>
-        <p>Powered By Himanshu </p>
+      <div className="border border-black py-10">
+        <div className="sm:flex justify-between  max-w-6xl mx-auto">
+          <p>Copyright © 2022 | Himanshu</p>
+          <p>Powered By Himanshu </p>
+        </div>
       </div>
     </div>
   );

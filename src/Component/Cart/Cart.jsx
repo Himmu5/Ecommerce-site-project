@@ -11,15 +11,17 @@ function Cart({ totalproduct }) {
   //   return <Loading />
   // }
 
-  if(totalproduct.length == 0){
-    return <SearchNotFound />
+  if (totalproduct.length == 0) {
+    return <SearchNotFound />;
   }
 
   return (
     <>
-      <div className="max-w-5xl mx-auto font-bold text-gray-500 bg-white p-3 mt-10 mb-10 xl:p-10 shadow-xl">
+      <div className=" max-w-5xl mx-auto font-bold text-gray-500 bg-white p-3 mt-10 mb-10 xl:p-10 shadow-xl ">
         <ProductList />
-        <CartTotalP />
+        <div className=" ">
+          <CartTotalP />
+        </div>
       </div>
     </>
   );

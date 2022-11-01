@@ -15,7 +15,7 @@ const initialValues = {
 };
 
 function submit(values ,bag) {
-  console.log('Submit Function ',bag);
+  
   axios.post("https://myeasykart.codeyogi.io/signup",{fullName:values.FULLNAME,email:values.EMAIL,password:values.PASSWORD}).then((response)=>{
     const {user , token}=response.data;
     localStorage.setItem("token",token);
@@ -30,7 +30,7 @@ const schema = Yup.object().shape({
   EMAIL: Yup.string().required(),
   USERNAME: Yup.string().required(),
   PASSWORD: Yup.string().min(6).required(),
-  CONFIRM: Yup.string().min(6).required(),
+  CONFIRM: Yup.string().min(6).required().oneOf([Yup.ref('PASSWORD') ,null ] ,"Password Must Match" ),
 });
 
 function SignUp({

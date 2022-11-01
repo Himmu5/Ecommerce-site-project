@@ -6,8 +6,9 @@ import { memo } from "react";
 import Hamburger from "hamburger-react";
 import WithUser from "../WithUser";
 import { withCart } from "./WithProvider";
+import { IoIosArrowDown } from "react-icons/io";
 
-function Nav({ total, CartTotal , setUser, user }) {
+function Nav({ total, CartTotal, setUser, user }) {
   const [hamtoggle, sethamtoggle] = useState(false);
 
   function Toggle() {
@@ -33,7 +34,7 @@ function Nav({ total, CartTotal , setUser, user }) {
               alt=""
             />
           </Link>
-          <div className="flex  items-center space-x-3">
+          <div className="flex  items-center space-x-8">
             <div className="hidden md:block  duration-500">
               <div className=" flex space-x-6">
                 <Link to="/">
@@ -44,12 +45,16 @@ function Nav({ total, CartTotal , setUser, user }) {
                 </p>
                 <p className="hover:text-red-400 hover:scale-105">ABOUT</p>
                 <p className="hover:text-red-400 hover:scale-105">CONTACT</p>
-                <Link
-                  to={"component/validation/SignIn"}
-                  className="hover:text-red-400 hover:scale-105"
-                >
-                  ACCOUNT
-                </Link>
+                <div className=" flex flex-col relative group ">
+                  <div className="flex gap-1 items-center hover:text-red-400  hover:scale-105 ">
+                    ACCOUNT <IoIosArrowDown />
+                  </div>
+                  <div className="hidden group-hover:flex z-20  flex-col absolute border px-6 py-3 mt-6 bg-white ">
+                    <Link to="/component/validation/SignIn" className="hover:text-red-500">Account</Link>
+                    <Link to="/component/Cart/Cart" className="hover:text-red-500">Cart</Link>
+                  </div>
+                </div>
+
                 {user && (
                   <p
                     className="hover:text-red-400 hover:scale-105 hover:cursor-pointer font-bold "

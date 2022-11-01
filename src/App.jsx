@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       {/* <Test /> */}
-      <div className="bg-gray-100 font-['Poppins'] selection:text-white selection:bg-red-400 ">
+      <div className="bg-gray-100 font-Poppins selection:text-white selection:bg-red-500 ">
         <UserProvider>
           <CartProvider>
             <AlertProvider>
