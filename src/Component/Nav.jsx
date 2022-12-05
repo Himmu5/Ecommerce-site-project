@@ -49,7 +49,7 @@ function Nav({ total, CartTotal, setUser, user }) {
                   <div className="flex gap-1 items-center hover:text-red-400  hover:scale-105 ">
                     ACCOUNT <IoIosArrowDown />
                   </div>
-                  <div className="hidden group-hover:flex z-20  flex-col absolute border px-6 py-3 mt-6 bg-white ">
+                  <div className="hidden group-hover:flex text-md z-20  flex-col absolute border px-6 py-3 mt-6 bg-white ">
                     <Link to="/component/validation/SignIn" className="hover:text-red-500">Account</Link>
                     <Link to="/component/Cart/Cart" className="hover:text-red-500">Cart</Link>
                   </div>

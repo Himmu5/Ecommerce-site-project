@@ -14,7 +14,6 @@ import Alert from "./Component/Alert";
 import UserProvider from "./Provider/UserProvider";
 import AlertProvider from "./Provider/AlertProvider";
 import CartProvider from "./Provider/CartProvider";
-import Test from "./Test";
 
 function App() {
   return (
@@ -48,7 +47,11 @@ function App() {
                   ></Route>
                   <Route
                     path="/component/validation/SignUp"
-                    element={<SignUp />}
+                    element={
+                      <AuthRoute>
+                        <SignUp />
+                      </AuthRoute>
+                    }
                   ></Route>
                   <Route
                     path="/component/validation/ResetPassword"

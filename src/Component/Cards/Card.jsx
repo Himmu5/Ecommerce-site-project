@@ -56,6 +56,12 @@ import { withCart } from '../WithProvider'
         />
       </Helmet>
 
+      <Helmet>
+
+        
+          
+      </Helmet>
+
       <div className="flex flex-col max-w-5xl mx-auto mt-5 mb-10 px-5 sm:px-0 bg-white shadow-md">
         <Link
           to="/"

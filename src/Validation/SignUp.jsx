@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Input from "./Input";
 import axios from "axios";
 import WithUser from "../WithUser";
+import WithAlert from "../WithAlert";
 
 const initialValues = {
   FULLNAME: "",
@@ -18,10 +19,11 @@ function submit(values ,bag) {
   
   axios.post("https://myeasykart.codeyogi.io/signup",{fullName:values.FULLNAME,email:values.EMAIL,password:values.PASSWORD}).then((response)=>{
     const {user , token}=response.data;
-    localStorage.setItem("token",token);
     bag.props.setUser(user);
+    localStorage.setItem("token",token);
+    bag.props.setAlert({message:'Account Created Successful' , type:'success'})
   }).catch((e)=>{
-    console.log("error" ,e);
+    bag.props.setAlert({message:'Account not created' , type:'error'})
   })
 }
 
@@ -129,4 +131,4 @@ const myHoc = withFormik({
 });
 const Signup = myHoc(SignUp);
 
-export default WithUser(Signup);
+export default WithAlert(WithUser(Signup));

@@ -17,15 +17,19 @@ let ErrorMap = {
 };
 
 function Alert({ alert, RemoveAlert }) {
+
+
   useEffect(() => {
     if (alert) {
       const dismissTimer = setTimeout(RemoveAlert, 3 * 1000);
-
+      
       return function () {
         clearTimeout(dismissTimer);
       };
     }
   }, [alert]);
+
+  
 
   if (!alert) {
     return;

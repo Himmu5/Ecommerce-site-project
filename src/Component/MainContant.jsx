@@ -6,6 +6,7 @@ import Loading from "./Cards/Loading";
 import SearchNotFound from "./SearchNotFound";
 import { range } from "lodash";
 import { Link, useSearchParams } from "react-router-dom";
+import { MdNavigateNext } from "react-icons/md";
 
 function MainContant() {
   const [ApiData, setApiData] = useState([]);
@@ -104,7 +105,17 @@ function MainContant() {
         {ApiData.data.length === 0 && <SearchNotFound />}
         <AllCards data={ApiData.data} />
 
-        <div className="flex gap-3 p-3 pt-10 sm:pl-20">
+        <div className="flex gap-3 p-3 pt-10 sm:pl-20 items-center text-white ">
+          {ApiData.meta.first_page !== page && (
+            <Link to={"?" + new URLSearchParams({ ...params, page: page - 1 })}>
+              
+              <MdNavigateNext
+                size={25}
+                className="bg-red-500 hover:bg-red-700 rounded-full text-white rotate-180 "
+              />
+            </Link>
+          )}
+
           {range(1, ApiData.meta.last_page + 1).map((item) => {
             return (
               <Link
@@ -119,6 +130,15 @@ function MainContant() {
               </Link>
             );
           })}
+          {ApiData.meta.last_page !== page && (
+            <Link to={"?" + new URLSearchParams({ ...params, page: page + 1 })}>
+              
+              <MdNavigateNext
+                size={25}
+                className="bg-red-500 hover:bg-red-700 rounded-full text-white "
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>
